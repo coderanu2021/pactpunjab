@@ -131,28 +131,24 @@ Page Title
 
 
 <!-- PAGE HERO -->
-<div class="page-hero">
-  <div class="hero-glow"></div>
-  <div class="hero-glow2"></div>
-  <div class="page-hero-inner">
-    <div class="breadcrumb">
-      <a href="index.html"><i class="fas fa-home"></i> Home</a>
-      <i class="fas fa-chevron-right"></i>
-      <a href="#">About Us</a>
-      <i class="fas fa-chevron-right"></i>
-      <span class="active">Special Interest Groups</span>
-    </div>
-    <div class="page-hero-tag"><span>About Us</span></div>
-    <h1>Special Interest <span>Groups</span></h1>
-    <p>Focused communities within P A C T — where members with shared specialisations connect, collaborate, and grow together at a deeper level.</p>
-    <div class="hero-chips">
+
+
+<x-ui.page-hero title="Special Interest Groups" subtitle="About Us" description="Focused communities within P A C T — where members with shared specialisations connect,
+         collaborate, and grow together at a deeper level."
+    :breadcrumbs="[
+        ['label' => 'Home', 'url' => route('home')],
+        ['label' => 'About Us', 'url' => '#'],
+        ['label' => 'Special Interest Groups']
+    ]"
+>
+    <x-slot:chips>
       <div class="hero-chip"><i class="fas fa-layer-group"></i> 6+ Active SIGs</div>
       <div class="hero-chip"><i class="fas fa-users"></i> Open to All Members</div>
       <div class="hero-chip"><i class="fas fa-calendar-alt"></i> Dedicated Events</div>
       <div class="hero-chip"><i class="fas fa-comments"></i> Peer Networks</div>
-    </div>
-  </div>
-</div>
+    </x-slot:chips>
+
+</x-ui.page-hero>
 
 <!-- MAIN CONTENT -->
 <div class="page-body">

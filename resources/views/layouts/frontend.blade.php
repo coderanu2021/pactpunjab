@@ -63,13 +63,13 @@
       <div class="nav-item">
         <div class="nav-link">About Us <i class="fas fa-chevron-down chevron"></i></div>
         <div class="dropdown">
-          <a href="#"><i class="fas fa-user-circle"></i> Profile</a>
-          <a href="#"><i class="fas fa-bullseye"></i> Aim &amp; Objectives</a>
-          <a href="#"><i class="fas fa-cogs"></i> Activities &amp; Services</a>
-          <a href="#"><i class="fas fa-layer-group"></i> Special Interest Groups</a>
+          <a href="{{ route('profile') }}"><i class="fas fa-user-circle"></i> Profile</a>
+          <a href="{{ route('aim-objective') }}"><i class="fas fa-bullseye"></i> Aim &amp; Objectives</a>
+          <a href="{{ route('activities-services') }}"><i class="fas fa-cogs"></i> Activities &amp; Services</a>
+          <a href="{{ route('intrest-group') }}"><i class="fas fa-layer-group"></i> Special Interest Groups</a>
           <div class="dd-divider"></div>
-          <a href="#"><i class="fas fa-award"></i> Awards &amp; Recognition</a>
-          <a href="#"><i class="fas fa-file-alt"></i> Annual Reports</a>
+          <a href="{{ route('awards-recognition') }}"><i class="fas fa-award"></i> Awards &amp; Recognition</a>
+          <a href="{{ route('annual-reports') }}"><i class="fas fa-file-alt"></i> Annual Reports</a>
           <a href="#"><i class="fas fa-map-marker-alt"></i> Contact Us</a>
         </div>
       </div>
@@ -211,7 +211,7 @@
     </div>
   </div>
 </footer>
-
+<script src="{{asset('assets/css/frontend/js/main.js')}}"> </script>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"79983e1b26f14ddbb98c6c2ab1562988","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>

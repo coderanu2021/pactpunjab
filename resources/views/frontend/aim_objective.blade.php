@@ -1,4 +1,4 @@
-@extends('layouts.frontend');
+@extends('layouts.frontend')
 @Section('title')Profile @endsection
 @section('content')
 <style>
@@ -102,22 +102,17 @@
 
 
 <!-- PAGE HERO -->
-<div class="page-hero">
-  <div class="page-hero-glow"></div>
-  <div class="page-hero-glow2"></div>
-  <div class="page-hero-inner">
-    <div class="breadcrumb">
-      <a href="index.html"><i class="fas fa-home"></i> Home</a>
-      <i class="fas fa-chevron-right"></i>
-      <a href="#">About Us</a>
-      <i class="fas fa-chevron-right"></i>
-      <span class="active">Aim & Objectives</span>
-    </div>
-    <div class="page-hero-tag"><span>About Us</span></div>
-    <h1>Aim & <span>Objectives</span></h1>
-    <p>The guiding purpose and strategic goals that drive everything P A C T does — for 600+ IT traders across Punjab & Chandigarh.</p>
-  </div>
-</div>
+
+
+<x-ui.page-hero title="Aim & Objectives" subtitle="About Us" description="The guiding purpose and strategic goals that drive everything P A C T does — for 600+ IT traders across Punjab & Chandigarh."
+    :breadcrumbs="[
+        ['label' => 'Home', 'url' => route('home')],
+        ['label' => 'About Us', 'url' => '#'],
+        ['label' => 'Aim & Objectives']
+    ]"
+>
+
+</x-ui.page-hero>
 
 <!-- MAIN CONTENT -->
 <div class="page-body">

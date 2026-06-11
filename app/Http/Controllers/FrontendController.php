@@ -28,4 +28,23 @@ class FrontendController extends Controller
     public function interest_group(){
         return view('frontend.interest_group'); 
     }
+
+    public function activites_services(){
+        return view('frontend.activites_services');
+    }
+   public function  registartion_certificate(){
+            return view('frontend.registartion_certificate');
+
+   }
+ public function  awards_recognition(){
+            return view('frontend.awards_recognition');
+
+   }
+
+    public function  annual_reports(){
+            return view('frontend.annual_reports');
+
+   }
+   
+
 }

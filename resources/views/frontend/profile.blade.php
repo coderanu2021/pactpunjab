@@ -159,21 +159,17 @@ Profile
     </style>
 @section('content')
 
-<div class="page-hero">
-  <div class="page-hero-glow"></div>
-  <div class="page-hero-inner">
-    <div class="breadcrumb">
-      <a href="index.html"><i class="fas fa-home"></i> Home</a>
-      <i class="fas fa-chevron-right"></i>
-      <a href="#">About Us</a>
-      <i class="fas fa-chevron-right"></i>
-      <span class="active">Profile</span>
-    </div>
-    <div class="page-hero-tag"><span>About Us</span></div>
-    <h1>Organisation <span>Profile</span></h1>
-    <p>Get to know the story, structure, and spirit of Punjab & Chandigarh's leading IT trade body — P A C T.</p>
-  </div>
-</div>
+
+
+<x-ui.page-hero title="Organisation Profile" subtitle="About Us" description="Get to know the story, structure, and spirit of Punjab & Chandigarh's leading IT trade body — P A C T.s"
+    :breadcrumbs="[
+        ['label' => 'Home', 'url' => route('home')],
+        ['label' => 'About Us', 'url' => '#'],
+        ['label' => 'Organisation Profile']
+    ]"
+>
+   
+</x-ui.page-hero>
 
 <!-- MAIN CONTENT -->
 <div class="page-body">
