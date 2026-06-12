@@ -62,5 +62,10 @@ class FrontendController extends Controller
 
    }
 
+     public function advisory_board(){
+        return view('frontend.advisory_board');
+
+   }
+
    
 }

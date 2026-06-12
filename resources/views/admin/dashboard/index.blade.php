@@ -1,7 +1,7 @@
 @extends('layouts.backend')
 @section('title') Dashboard @endsection
 
-<main id="main">
+@section('content')
 
   <!-- Page Header -->
   <div class="page-header">
@@ -589,4 +589,4 @@
     </div>
   </div>
 
-</main>
+@endsection

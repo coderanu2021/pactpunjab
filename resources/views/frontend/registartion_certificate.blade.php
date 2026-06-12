@@ -122,9 +122,9 @@ Page Title
 .service-check.checked{border-color:var(--blue2);background:rgba(30,80,162,.06)}
 .service-check input[type="checkbox"]{
   width:16px;height:16px;accent-color:var(--blue2);
-  cursor:pointer;flex-shrink:0;
+  pointer-events:none;flex-shrink:0;
 }
-.service-check label{font-size:12px;font-weight:600;color:var(--text);cursor:pointer;line-height:1.3}
+.service-check label{font-size:12px;font-weight:600;color:var(--text);pointer-events:none;line-height:1.3}
 
 /* Input with icon */
 .input-icon-wrap{position:relative}
@@ -881,12 +881,63 @@ function goStep(n) {
 
 /* ── SUBMIT ── */
 function submitForm() {
-  const anyChecked = [...document.querySelectorAll('#services-grid input[type="checkbox"]')].some(c => c.checked);
-  if (!anyChecked) {
+  const checkboxes = document.querySelectorAll('#services-grid input[type="checkbox"]');
+  const services = [...checkboxes].filter(c => c.checked).map(c => c.nextElementSibling.innerText);
+  if (services.length === 0) {
     document.getElementById('service-error').style.display = 'flex';
     return;
   }
-  alert('Redirecting to payment gateway...\n\nIn production this will open the Razorpay checkout.');
+
+  const payload = {
+    association: selectedAssoc === 'Other Association' ? document.getElementById('other-assoc-name').value : selectedAssoc,
+    firm_name: document.getElementById('firm-name').value,
+    district: document.getElementById('district').value,
+    address: document.getElementById('address').value,
+    proprietor: document.getElementById('proprietor').value,
+    mobile_primary: document.getElementById('mobile1').value,
+    contact2_name: document.getElementById('contact2-name').value,
+    mobile_secondary: document.getElementById('mobile2').value,
+    email: document.getElementById('email').value,
+    website: document.getElementById('website').value,
+    portal: document.getElementById('portal').value,
+    companies_dealt_with: document.getElementById('companies').value,
+    services_offered: services
+  };
+
+  const btn = document.getElementById('pay-btn');
+  const originalText = btn.innerHTML;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+  btn.style.pointerEvents = 'none';
+
+  fetch('{{ route('registration-certificate.store') }}', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRF-TOKEN': '{{ csrf_token() }}',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  })
+  .then(res => res.json())
+  .then(data => {
+    btn.innerHTML = originalText;
+    btn.style.pointerEvents = 'all';
+    if (data.success) {
+      alert(data.message + '\n\nRedirecting to payment gateway...\n(In production this will open the Razorpay checkout)');
+      // location.reload(); // optionally clear form
+    } else {
+      let errorMsg = data.message || 'Something went wrong.';
+      if (data.errors) {
+        errorMsg += '\n' + Object.values(data.errors).flat().join('\n');
+      }
+      alert('Error: ' + errorMsg);
+    }
+  })
+  .catch(err => {
+    btn.innerHTML = originalText;
+    btn.style.pointerEvents = 'all';
+    alert('Failed to submit. Please check your connection.');
+  });
 }
 </script>
 @endsection
