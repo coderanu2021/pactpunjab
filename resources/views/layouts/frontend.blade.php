@@ -77,9 +77,9 @@
         <div class="nav-link">Management <i class="fas fa-chevron-down chevron"></i></div>
         <div class="dropdown">
           <a href="#"><i class="fas fa-id-badge"></i> Office Bearers</a>
-          <a href="#"><i class="fas fa-users"></i> Executive Committee</a>
-          <a href="#"><i class="fas fa-star"></i> Special Invitees</a>
-          <a href="#"><i class="fas fa-sitemap"></i> Sub Committees</a>
+          <a href="{{ route('executive-committee') }}"><i class="fas fa-users"></i> Executive Committee</a>
+          <a href="{{ route('special-invitees') }}"><i class="fas fa-star"></i> Special Invitees</a>
+          <a href="{{ route('sub-committees') }}"><i class="fas fa-sitemap"></i> Sub Committees</a>
           <a href="#"><i class="fas fa-chalkboard-teacher"></i> Advisory Board</a>
           <a href="#"><i class="fas fa-history"></i> Past Presidents</a>
         </div>

@@ -19,7 +19,9 @@ Route::get('/activities-services', [FrontendController::class, 'activites_servic
 Route::get('/registration-certificate', [FrontendController::class, 'registartion_certificate'])->name('registration-certificate');
 Route::get('/awards-recognition', [FrontendController::class, 'awards_recognition'])->name('awards-recognition');
 Route::get('/annual-reports', [FrontendController::class, 'annual_reports'])->name('annual-reports');
-
+Route::get('/executive-committee', [FrontendController::class, 'executive_committee'])->name('executive-committee');
+Route::get('/special-invitees', [FrontendController::class, 'special_invitees'])->name('special-invitees');
+Route::get('/sub-committees', [FrontendController::class, 'sub_committees'])->name('sub-committees');
 
 
 

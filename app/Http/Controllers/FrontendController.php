@@ -45,6 +45,22 @@ class FrontendController extends Controller
             return view('frontend.annual_reports');
 
    }
-   
 
+
+    public function  executive_committee(){
+            return view('frontend.executive_committee');
+
+   }
+
+    public function  special_invitees(){
+            return view('frontend.special_invitees');
+
+   }
+
+   public function sub_committees(){
+                return view('frontend.sub_committees');
+
+   }
+
+   
 }
