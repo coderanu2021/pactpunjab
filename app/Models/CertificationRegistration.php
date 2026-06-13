@@ -20,9 +20,16 @@ class CertificationRegistration extends Model
         'portal',
         'companies_dealt_with',
         'services_offered',
+        'status',
+        'rejection_reason',
     ];
 
     protected $casts = [
         'services_offered' => 'array',
     ];
+
+    public function certificate()
+    {
+        return $this->hasOne(PersonalCertificate::class, 'registration_id');
+    }
 }

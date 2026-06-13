@@ -1,4 +1,4 @@
-@extends('layouts.frontend');
+@extends('layouts.frontend')
 @section('title')  This is Page Title @endsection;
 
 @section('content')
