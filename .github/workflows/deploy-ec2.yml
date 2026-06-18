@@ -1,0 +1,82 @@
+name: CI/CD to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y software-properties-common gnupg2 ca-certificates lsb-release
+          sudo add-apt-repository -y ppa:ondrej/php
+          sudo apt-get update
+          sudo apt-get install -y php8.3 php8.3-cli php8.3-mbstring php8.3-bcmath php8.3-xml php8.3-json php8.3-zip php8.3-curl php8.3-dom php8.3-tokenizer
+          php -v
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install PHP dependencies
+        run: |
+          composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
+
+      - name: Install Node dependencies
+        run: |
+          npm ci
+
+      - name: Build frontend assets
+        run: |
+          npm run build
+
+      - name: Run tests
+        run: |
+          composer test
+
+      - name: Prepare deployment package
+        run: |
+          rm -rf deploy-package
+          mkdir deploy-package
+          rsync -av --exclude vendor --exclude node_modules --exclude storage --exclude public/build --exclude .git deploy-package/ .
+          cp -r vendor deploy-package/vendor
+          cp -r public/build deploy-package/public/build
+          cp -r storage deploy-package/storage
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pactpunjab-deploy
+          path: deploy-package
+
+      - name: Deploy to EC2
+        if: github.ref == 'refs/heads/main'
+        env:
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+          EC2_USER: ${{ secrets.EC2_USER }}
+          EC2_KEY: ${{ secrets.EC2_KEY }}
+          APP_ENV: ${{ secrets.APP_ENV }}
+          APP_KEY: ${{ secrets.APP_KEY }}
+          DB_CONNECTION: ${{ secrets.DB_CONNECTION }}
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_PORT: ${{ secrets.DB_PORT }}
+          DB_DATABASE: ${{ secrets.DB_DATABASE }}
+          DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          APP_URL: ${{ secrets.APP_URL }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$EC2_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key $EC2_USER@$EC2_HOST 'bash -lc "rm -rf ~/pactpunjab && mkdir -p ~/pactpunjab && exit"'
+          scp -i ~/.ssh/deploy_key -r deploy-package/* $EC2_USER@$EC2_HOST:~/pactpunjab/
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key $EC2_USER@$EC2_HOST 'bash -lc "cd ~/pactpunjab && composer install --no-dev --optimize-autoloader && npm ci --ignore-scripts && npm run build && php artisan migrate --force && php artisan config:cache && php artisan route:cache && php artisan view:cache"'
