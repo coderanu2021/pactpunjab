@@ -1,4 +1,4 @@
-name: Test EC2 SSH
+name: Test SSH
 
 on:
   push:
@@ -6,22 +6,17 @@ on:
       - main
 
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
       - name: Test SSH
-        uses: appleboy/ssh-action@v1.0.3
+        uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
+          debug: true
           script: |
             echo "CONNECTED"
             whoami
-            pwd
-            hostname
-            php -v
