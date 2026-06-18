@@ -1,4 +1,4 @@
-name: CI/CD to EC2
+name: Deploy to EC2
 
 on:
   push:
@@ -13,30 +13,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.3'
-          extensions: mbstring, bcmath, xml, curl, zip, pdo_mysql
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Install Composer Dependencies
-        run: |
-          composer install --no-interaction --prefer-dist --optimize-autoloader
-
-      - name: Install NPM Dependencies
-        run: |
-          npm ci
-
-      - name: Build Assets
-        run: |
-          npm run build
-
-      - name: Deploy to EC2
+      - name: Test EC2 Connection
         env:
           EC2_HOST: ${{ secrets.EC2_HOST }}
           EC2_USER: ${{ secrets.EC2_USER }}
@@ -49,21 +26,38 @@ jobs:
 
           ssh-keyscan -H $EC2_HOST >> ~/.ssh/known_hosts
 
-          ssh -i ~/.ssh/deploy_key $EC2_USER@$EC2_HOST << 'EOF'
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key $EC2_USER@$EC2_HOST "
+            echo 'Connected Successfully';
+            whoami;
+            pwd;
+          "
 
-          cd /var/www/html
+      - name: Deploy Application
+        env:
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+          EC2_USER: ${{ secrets.EC2_USER }}
+          EC2_KEY: ${{ secrets.EC2_KEY }}
+        run: |
+          mkdir -p ~/.ssh
 
-          git pull origin main
+          echo "$EC2_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
 
-          composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+          ssh-keyscan -H $EC2_HOST >> ~/.ssh/known_hosts
 
-          php artisan migrate --force
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key $EC2_USER@$EC2_HOST "
+            cd /var/www/html
 
-          php artisan optimize:clear
-          php artisan config:cache
-          php artisan route:cache
-          php artisan view:cache
+            git pull origin main
 
-          sudo systemctl restart nginx
+            composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
 
-          EOF
+            php artisan migrate --force
+
+            php artisan optimize:clear
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
+
+            sudo systemctl restart nginx
+          "
