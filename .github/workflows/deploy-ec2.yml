@@ -17,7 +17,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
-          extensions: mbstring, bcmath, xml, curl, zip, pdo_mysql
+          extensions: mbstring,bcmath,xml,curl,zip,pdo_mysql
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -25,22 +25,19 @@ jobs:
           node-version: 20
 
       - name: Install Composer Dependencies
-        run: |
-          composer install --no-interaction --prefer-dist --optimize-autoloader
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
       - name: Install NPM Dependencies
-        run: |
-          npm ci
+        run: npm ci
 
       - name: Build Assets
-        run: |
-          npm run build
+        run: npm run build
 
       - name: Deploy to EC2
         env:
           EC2_HOST: ${{ secrets.EC2_HOST }}
-          EC2_KEY: ${{ secrets.EC2_KEY }}
           EC2_USER: ${{ secrets.EC2_USER }}
+          EC2_KEY: ${{ secrets.EC2_KEY }}
         run: |
           mkdir -p ~/.ssh
 
@@ -49,21 +46,25 @@ jobs:
 
           ssh-keyscan -H $EC2_HOST >> ~/.ssh/known_hosts
 
-          ssh -i ~/.ssh/deploy_key $EC2_USER@$EC2_HOST << 'EOF'
+          ssh -v -o StrictHostKeyChecking=no \
+          -i ~/.ssh/deploy_key \
+          $EC2_USER@$EC2_HOST "
+            cd /var/www/html &&
 
-          cd /var/www/html
+            git pull origin main &&
 
-          git pull origin main
+            sudo chown -R nginx:nginx storage bootstrap/cache &&
+            sudo chmod -R 775 storage bootstrap/cache &&
 
-          composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+            composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader &&
 
-          php artisan migrate --force
+            php artisan migrate --force &&
 
-          php artisan optimize:clear
-          php artisan config:cache
-          php artisan route:cache
-          php artisan view:cache
+            php artisan optimize:clear &&
+            php artisan config:cache &&
+            php artisan route:cache &&
+            php artisan view:cache &&
 
-          sudo systemctl restart nginx
-
-          EOF
+            sudo systemctl restart php-fpm &&
+            sudo systemctl restart nginx
+          "
