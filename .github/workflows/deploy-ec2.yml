@@ -10,9 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-      - name: Deploy
+      - name: Deploy to EC2
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.EC2_HOST }}
@@ -21,19 +22,35 @@ jobs:
           script: |
             cd /var/www/html
 
+            echo "Pulling latest code..."
             git pull origin main
 
+            echo "Installing composer dependencies..."
             composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
 
+            echo "Fixing Laravel permissions..."
+            sudo mkdir -p storage/logs
+            sudo mkdir -p bootstrap/cache
+
+            sudo chown -R nginx:nginx storage
+            sudo chown -R nginx:nginx bootstrap/cache
+
+            sudo chmod -R 775 storage
+            sudo chmod -R 775 bootstrap/cache
+
+            echo "Clearing old cache..."
+            php artisan optimize:clear
+
+            echo "Running migrations..."
             php artisan migrate --force
 
-            sudo chown -R nginx:nginx storage bootstrap/cache
-            sudo chmod -R 775 storage bootstrap/cache
-
-            php artisan optimize:clear
+            echo "Caching configuration..."
             php artisan config:cache
             php artisan route:cache
             php artisan view:cache
 
+            echo "Restarting services..."
             sudo systemctl restart php-fpm
             sudo systemctl restart nginx
+
+            echo "Deployment completed successfully!"
