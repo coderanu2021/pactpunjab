@@ -1,5 +1,5 @@
 @extends('layouts.frontend')
-@section('title')  This is Page Title @endsection
+@section('title')  Page Title  @endsection
 
 @section('content')
 <!-- HERO -->
