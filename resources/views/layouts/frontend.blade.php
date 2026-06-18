@@ -133,7 +133,7 @@
 </header>
 
 <main>
-    @yield('content');
+    @yield('content')
 </main>
 
 <!-- FOOTER -->
