@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Downloads – P A C T Punjab & Chandigarh</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="pact-common.css">
+<style>
+/* ── CATEGORY TABS ── */
+.dl-cat-tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:36px}
+.dl-tab{padding:10px 20px;border-radius:25px;font-size:13px;font-weight:600;
+  border:1.5px solid var(--border);color:var(--muted);background:#fff;
+  cursor:pointer;transition:all .2s;font-family:var(--font);
+  display:flex;align-items:center;gap:8px;}
+.dl-tab:hover{border-color:var(--blue2);color:var(--blue2)}
+.dl-tab.active{background:var(--navy);border-color:var(--navy);color:var(--gold2)}
+.dl-tab-count{background:rgba(255,255,255,.15);color:inherit;
+  padding:1px 7px;border-radius:20px;font-size:10px;font-weight:700}
+.dl-tab:not(.active) .dl-tab-count{background:var(--light);color:var(--muted)}
+
+/* ── DOWNLOAD CARDS ── */
+.dl-section{margin-bottom:60px}
+.dl-section-title{font-size:13px;font-weight:800;color:var(--navy);
+  text-transform:uppercase;letter-spacing:1.5px;margin-bottom:20px;
+  display:flex;align-items:center;gap:10px;}
+.dl-section-title::after{content:'';flex:1;height:1px;
+  background:linear-gradient(90deg,var(--border),transparent)}
+.dl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.dl-card{
+  background:#fff;border:1px solid var(--border);border-radius:16px;
+  padding:22px 20px;display:flex;align-items:flex-start;gap:14px;
+  transition:box-shadow .2s,transform .2s;
+}
+.dl-card:hover{box-shadow:var(--card-shadow);transform:translateY(-3px)}
+.dl-file-ico{
+  width:48px;height:48px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;flex-shrink:0;
+}
+.dl-card-info{flex:1;min-width:0}
+.dl-card-info h5{font-size:13px;font-weight:700;color:var(--navy);
+  margin-bottom:3px;line-height:1.35;}
+.dl-card-info p{font-size:11px;color:var(--muted);margin-bottom:8px;line-height:1.5}
+.dl-card-meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.dl-meta-tag{font-size:10px;font-weight:600;padding:2px 8px;
+  border-radius:20px;background:var(--light);color:var(--muted);
+  border:1px solid var(--border)}
+.dl-btn{
+  flex-shrink:0;width:36px;height:36px;border-radius:10px;
+  background:var(--navy);color:var(--gold2);border:none;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:14px;transition:all .2s;align-self:center;
+}
+.dl-btn:hover{background:var(--blue2);color:#fff;transform:translateY(-1px)}
+
+/* ── STATS BAND ── */
+.dl-stats{
+  background:var(--light);border-radius:22px;padding:36px 44px;
+  display:flex;align-items:center;justify-content:space-around;
+  gap:20px;flex-wrap:wrap;margin-bottom:80px;
+}
+.dl-stat{text-align:center}
+.dl-stat .n{font-size:32px;font-weight:900;color:var(--blue2);line-height:1}
+.dl-stat .l{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-top:4px}
+
+/* ── REQUEST BAND ── */
+.request-band{
+  background:var(--navy2);border-radius:22px;padding:44px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:32px;flex-wrap:wrap;margin-bottom:80px;
+}
+.req-text h3{font-size:20px;font-weight:800;color:#fff;margin-bottom:6px}
+.req-text p{font-size:14px;color:rgba(255,255,255,.5);max-width:480px;line-height:1.7}
+
+@media(max-width:1100px){.dl-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:700px){.dl-grid{grid-template-columns:1fr}.request-band{flex-direction:column;align-items:flex-start;padding:32px 24px}}
+</style>
+</head>
+<body>
+<!-- <?php include 'includes/header.php'; ?> -->
+<div class="page-hero">
+  <div class="hero-glow"></div><div class="hero-glow2"></div>
+  <div class="page-hero-inner">
+    <div class="breadcrumb">
+      <a href="index.html"><i class="fas fa-home"></i> Home</a><i class="fas fa-chevron-right"></i>
+      <a href="#">Members</a><i class="fas fa-chevron-right"></i>
+      <span class="active">Downloads</span>
+    </div>
+    <div class="page-hero-tag"><span>Members</span></div>
+    <h1>Member <span>Downloads</span></h1>
+    <p>All PACT resources in one place — forms, circulars, annual reports, certificates, guidelines, and press kits available for instant download.</p>
+    <div class="hero-chips">
+      <div class="hero-chip"><i class="fas fa-download"></i> 50+ Resources</div>
+      <div class="hero-chip"><i class="fas fa-file-pdf"></i> PDF & Word</div>
+      <div class="hero-chip"><i class="fas fa-lock-open"></i> Free for Members</div>
+    </div>
+  </div>
+</div>
+
+<div class="page-body">
+
+  <!-- STATS -->
+  <div class="dl-stats">
+    <div class="dl-stat"><div class="n">54</div><div class="l">Total Files</div></div>
+    <div class="dl-stat"><div class="n">12</div><div class="l">Forms</div></div>
+    <div class="dl-stat"><div class="n">48</div><div class="l">Circulars</div></div>
+    <div class="dl-stat"><div class="n">6</div><div class="l">Annual Reports</div></div>
+    <div class="dl-stat"><div class="n">8</div><div class="l">Guidelines</div></div>
+  </div>
+
+  <!-- CATEGORY TABS -->
+  <div class="dl-cat-tabs">
+    <div class="dl-tab active" onclick="filterDl(this,'all')"><i class="fas fa-th"></i> All Files <span class="dl-tab-count">54</span></div>
+    <div class="dl-tab" onclick="filterDl(this,'forms')"><i class="fas fa-file-alt"></i> Forms <span class="dl-tab-count">12</span></div>
+    <div class="dl-tab" onclick="filterDl(this,'circulars')"><i class="fas fa-bell"></i> Circulars <span class="dl-tab-count">10</span></div>
+    <div class="dl-tab" onclick="filterDl(this,'reports')"><i class="fas fa-chart-bar"></i> Annual Reports <span class="dl-tab-count">6</span></div>
+    <div class="dl-tab" onclick="filterDl(this,'guidelines')"><i class="fas fa-book"></i> Guidelines <span class="dl-tab-count">8</span></div>
+    <div class="dl-tab" onclick="filterDl(this,'media')"><i class="fas fa-images"></i> Media Kit <span class="dl-tab-count">4</span></div>
+  </div>
+
+  <!-- FORMS SECTION -->
+  <div class="dl-section" data-cat="forms">
+    <div class="dl-section-title"><i class="fas fa-file-alt" style="color:var(--blue2)"></i> Membership & Registration Forms</div>
+    <div class="dl-grid">
+      <div class="dl-card">
+        <div class="dl-file-ico ico-box blue lg"><i class="fas fa-file-word"></i></div>
+        <div class="dl-card-info">
+          <h5>Membership Application Form</h5>
+          <p>Standard application form for new PACT membership — all tiers</p>
+          <div class="dl-card-meta"><span class="dl-meta-tag">DOCX</span><span class="dl-meta-tag">248 KB</span><span class="dl-meta-tag">Updated Jun 2024</span></div>
+        </div>
+        <button class="dl-btn"><i class="fas fa-download"></i></button>
+      </div>
+      <div class="dl-card">
+        <div class="dl-file-ico ico-box red lg"><i class="fas fa-file-pdf"></i></div>
+        <div class="dl-card-info">
+          <h5>Certification Registration Form</h5>
+          <p>Form for applying for PACT member certification — all sections</p>
+          <div class="dl-card-meta"><span class="dl-meta-tag">PDF</span><span class="dl-meta-tag">180 KB</span><span class="dl-meta-tag">Updated Mar 2024</span></div>
+        </div>
+        <button class="dl-btn"><i class="fas fa-download"></i></button>
+      </div>
+      <div class="dl-card">
+        <div class="dl-file-ico ico-box blue lg"><i class="fas fa-file-word"></i></div>
+        <div class="dl-card-info">
+          <h5>Membership Renewal Form</h5>
+          <p>Annual renewal form for existing PACT members</p>
+          <div class="dl-card-meta"><span class="dl-meta-tag">DOCX</span><span class="dl-meta-tag">196 KB</span><span class="dl-meta-tag">Updated Jan 2024</span></div>
+        </div>
+        <button class="dl-btn"><i class="fas fa-download"></i></button>
+      </div>
+      <div class="dl-card">
+        <div class="dl-file-ico ico-box red lg"><i class="fas fa-file-pdf"></i></div>
+        <div class="dl-card-info">
+          <h5>Grievance Application Form</h5>
+          <p>Form to submit a trade grievance to the PACT Grievance Cell</p>
+          <div class="dl-card-meta"><span class="dl-meta-tag">PDF</span><span class="dl-meta-tag">152 KB</span><span class="dl-meta-tag">Updated Apr 2024</span></div>
+        </div>
+        <button class="dl-btn"><i class="fas fa-download"></i></button>
+      </div>
+      <div class="dl-card">
+        <div class="dl-file-ico ico-box blue lg"><i class="fas fa-file-word"></i></div>
+        <div class="dl-card-info">
+          <h5>SIG Enrollment Form</h5>
+          <p>Form to join one or more PACT Special Interest Groups</p>
+          <div class="dl-card-meta"><span class="dl-meta-tag">DOCX</span><span class="dl-meta-tag">144 KB</span><span class="dl-meta-tag">Updated Feb 2024</span></div>
+        </div>
+        <button class="dl-btn"><i class="fas fa-download"></i></button>
+      </div>
+      <div class="dl-card">
+        <div class="dl-file-ico ico-box gold lg"><i class="fas fa-file-excel"></i></div>
+        <div class="dl-card-info">
+          <h5>Award Nomination Form</h5>
+          <p>Nomination form for PACT Excellence Awards — all categories</p>
+          <div class="dl-card-meta"><span class="dl-meta-tag">XLSX</span><span class="dl-meta-tag">210 KB</span><span class="dl-meta-tag">Updated Jul 2024</span></div>
+        </div>
+        <button class="dl-btn"><i class="fas fa-download"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CIRCULARS SECTION -->
+  <div class="dl-section" data-cat="circulars">
+    <div class="dl-section-title"><i class="fas fa-bell" style="color:var(--accent)"></i> Key Circulars & Notifications</div>
+    <div class="dl-grid">
+      <div class="dl-card">
+        <div class="dl-file-ico ico-box red lg"><i class="fas fa-file-pdf"></i></div>
+        <div class="dl-card-info">
+          <h5>GST Updates — Dec 2023</h5>
+          <p>Circular No. PACT/CIRC/2023/048 — GST & E-Way Bill updates</p>
+          <div class="dl-card-meta"><span class="dl-meta-tag">PDF</span><span class="dl-meta-tag">1.2 MB</span><span class="dl-meta-tag">21 Dec 2023</span></div>
+        </div>
+        <button class="dl-btn"><i class="fas fa-download"></i></button>
+      </div>
+      <div class="dl-card">
+        <div class="dl-file-ico ico-box red lg"><i class="fas fa-file-pdf"></i></div>
+        <div class="dl-card-info">
+          <h5>50th GST Council — Decisions</h5>
+          <p>Circular No. PACT/CIRC/2023/031 — GST Council press release summary</p>
+          <div class="dl-card-meta"><span class="dl-meta-tag">PDF</span><span class="dl-meta-tag">980 KB</span><span class="dl-meta-tag">12 Jul 2023</span></div>
+        </div>
+        <button class="dl-btn"><i class="fas fa-download"></i></button>
+      </div>
+      <div class="dl-card">
+        <div class="dl-file-ico ico-box red lg"><i class="fas fa-file-pdf"></i></div>
+        <div class="dl-card-info">
+          <h5>e-Way Bill 2FA Circular</h5>
+          <p>Circular No. PACT/CIRC/2023/020 — Mandatory 2FA from Jul 2023</p>
+          <div class="dl-card-meta"><span class="dl-meta-tag">PDF</span><span class="dl-meta-tag">756 KB</span><span class="dl-meta-tag">13 Jun 2023</span></div>
+        </div>
+        <button class="dl-btn"><i class="fas fa-download"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANNUAL REPORTS SECTION -->
+  <div class="dl-section" data-cat="reports">
+    <div class="dl-section-title"><i class="fas fa-chart-bar" style="color:var(--blue2)"></i> Annual Reports</div>
+    <div class="dl-grid">
+      <div class="dl-card">
+        <div class="dl-file-ico ico-box blue lg"><i class="fas fa-file-pdf"></i></div>
+        <div class="dl-card-info">
+          <h5>Annual Report 2023–24</h5>
+          <p>Complete audited annual report — approved at AGM 2024</p>
+          <div class="dl-card-meta"><span class="dl-meta-tag">PDF</span><span class="dl-meta-tag">4.2 MB</span><span class="dl-meta-tag">AGM 2024</span></div>
+        </div>
+        <button class="dl-btn"><i class="fas fa-download"></i></button>
+      </div>
+      <div class="dl-card">
+        <div class="dl-file-ico ico-box blue lg"><i class="fas fa-file-pdf"></i></div>
+        <div class="dl-card-info">
+          <h5>Annual Report 2022–23</h5>
+          <p>Complete audited annual report — approved at AGM 2023</p>
+          <div class="dl-card-meta"><span class="dl-meta-tag">PDF</span><span class="dl-meta-tag">3.8 MB</span><span class="dl-meta-tag">AGM 2023</span></div>
+        </div>
+        <button class="dl-btn"><i class="fas fa-download"></i></button>
+      </div>
+      <div class="dl-card">
+        <div class="dl-file-ico ico-box blue lg"><i class="fas fa-file-pdf"></i></div>
+        <div class="dl-card-info">
+          <h5>Annual Report 2021–22</h5>
+          <p>Complete audited annual report — approved at AGM 2022</p>
+          <div class="dl-card-meta"><span class="dl-meta-tag">PDF</span><span class="dl-meta-tag">3.5 MB</span><span class="dl-meta-tag">AGM 2022</span></div>
+        </div>
+        <button class="dl-btn"><i class="fas fa-download"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- GUIDELINES SECTION -->
+  <div class="dl-section" data-cat="guidelines">
+    <div class="dl-section-title"><i class="fas fa-book" style="color:#108C50"></i> Guidelines & Policy Documents</div>
+    <div class="dl-grid">
+      <div class="dl-card">
+        <div class="dl-file-ico ico-box green lg"><i class="fas fa-file-pdf"></i></div>
+        <div class="dl-card-info">
+          <h5>PACT Constitution & Bye-Laws</h5>
+          <p>Official constitution, governance structure, and bye-laws of PACT</p>
+          <div class="dl-card-meta"><span class="dl-meta-tag">PDF</span><span class="dl-meta-tag">2.1 MB</span><span class="dl-meta-tag">Updated 2022</span></div>
+        </div>
+        <button class="dl-btn"><i class="fas fa-download"></i></button>
+      </div>
+      <div class="dl-card">
+        <div class="dl-file-ico ico-box green lg"><i class="fas fa-file-pdf"></i></div>
+        <div class="dl-card-info">
+          <h5>Code of Conduct for Members</h5>
+          <p>Ethical guidelines and code of conduct binding on all PACT members</p>
+          <div class="dl-card-meta"><span class="dl-meta-tag">PDF</span><span class="dl-meta-tag">680 KB</span><span class="dl-meta-tag">Updated 2023</span></div>
+        </div>
+        <button class="dl-btn"><i class="fas fa-download"></i></button>
+      </div>
+      <div class="dl-card">
+        <div class="dl-file-ico ico-box green lg"><i class="fas fa-file-pdf"></i></div>
+        <div class="dl-card-info">
+          <h5>GST Compliance Guide for IT Traders</h5>
+          <p>Step-by-step GST compliance handbook tailored for IT businesses</p>
+          <div class="dl-card-meta"><span class="dl-meta-tag">PDF</span><span class="dl-meta-tag">1.8 MB</span><span class="dl-meta-tag">Updated Jan 2024</span></div>
+        </div>
+        <button class="dl-btn"><i class="fas fa-download"></i></button>
+      </div>
+      <div class="dl-card">
+        <div class="dl-file-ico ico-box green lg"><i class="fas fa-file-pdf"></i></div>
+        <div class="dl-card-info">
+          <h5>Grievance Cell Procedure Manual</h5>
+          <p>Complete guide to filing and resolving trade grievances through PACT</p>
+          <div class="dl-card-meta"><span class="dl-meta-tag">PDF</span><span class="dl-meta-tag">540 KB</span><span class="dl-meta-tag">Updated 2023</span></div>
+        </div>
+        <button class="dl-btn"><i class="fas fa-download"></i></button>
+      </div>
+      <div class="dl-card">
+        <div class="dl-file-ico ico-box green lg"><i class="fas fa-file-pdf"></i></div>
+        <div class="dl-card-info">
+          <h5>Certification Mark Usage Guidelines</h5>
+          <p>How to correctly use the PACT Certified Member badge and logo</p>
+          <div class="dl-card-meta"><span class="dl-meta-tag">PDF</span><span class="dl-meta-tag">420 KB</span><span class="dl-meta-tag">Updated 2024</span></div>
+        </div>
+        <button class="dl-btn"><i class="fas fa-download"></i></button>
+      </div>
+      <div class="dl-card">
+        <div class="dl-file-ico ico-box green lg"><i class="fas fa-file-pdf"></i></div>
+        <div class="dl-card-info">
+          <h5>Election Procedure Manual</h5>
+          <p>Rules and procedures for PACT EC & office bearer elections</p>
+          <div class="dl-card-meta"><span class="dl-meta-tag">PDF</span><span class="dl-meta-tag">380 KB</span><span class="dl-meta-tag">Updated 2022</span></div>
+        </div>
+        <button class="dl-btn"><i class="fas fa-download"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEDIA KIT SECTION -->
+  <div class="dl-section" data-cat="media">
+    <div class="dl-section-title"><i class="fas fa-images" style="color:#7C3AED"></i> Media Kit & Brand Assets</div>
+    <div class="dl-grid">
+      <div class="dl-card">
+        <div class="dl-file-ico ico-box purple lg"><i class="fas fa-image"></i></div>
+        <div class="dl-card-info">
+          <h5>PACT Logo Pack</h5>
+          <p>Official PACT logo in PNG, SVG, and EPS formats — light & dark versions</p>
+          <div class="dl-card-meta"><span class="dl-meta-tag">ZIP</span><span class="dl-meta-tag">4.8 MB</span><span class="dl-meta-tag">Brand Assets</span></div>
+        </div>
+        <button class="dl-btn"><i class="fas fa-download"></i></button>
+      </div>
+      <div class="dl-card">
+        <div class="dl-file-ico ico-box purple lg"><i class="fas fa-palette"></i></div>
+        <div class="dl-card-info">
+          <h5>Brand Style Guide</h5>
+          <p>Official colours, typography, and usage guidelines for PACT brand identity</p>
+          <div class="dl-card-meta"><span class="dl-meta-tag">PDF</span><span class="dl-meta-tag">2.4 MB</span><span class="dl-meta-tag">Brand Guide</span></div>
+        </div>
+        <button class="dl-btn"><i class="fas fa-download"></i></button>
+      </div>
+      <div class="dl-card">
+        <div class="dl-file-ico ico-box purple lg"><i class="fas fa-newspaper"></i></div>
+        <div class="dl-card-info">
+          <h5>PACT Press Kit 2024</h5>
+          <p>Media fact sheet, key statistics, leadership bios, and press contact info</p>
+          <div class="dl-card-meta"><span class="dl-meta-tag">PDF</span><span class="dl-meta-tag">1.6 MB</span><span class="dl-meta-tag">Press Kit</span></div>
+        </div>
+        <button class="dl-btn"><i class="fas fa-download"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- REQUEST BAND -->
+  <div class="request-band">
+    <div class="req-text">
+      <div class="eyebrow ew-gold2">Can't Find It?</div>
+      <h3>Request a Specific Document</h3>
+      <p>If you need a document not listed here, contact the PACT Secretariat and we will locate or prepare it for you within 2 working days.</p>
+    </div>
+    <div class="btn-group">
+      <a href="contact.html" class="btn-gold"><i class="fas fa-paper-plane"></i> Request a Document</a>
+      <a href="member-circulars.html" class="btn-ghost-dark"><i class="fas fa-bell"></i> View Circulars</a>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-band-red">
+    <div class="cta-band-text">
+      <h3>All Downloads Are Free for PACT Members</h3>
+      <p>Become a member today and get unrestricted access to every document, form, circular, and resource in the PACT downloads library.</p>
+    </div>
+    <div class="cta-band-btns">
+      <a href="become-member.html" class="btn-white"><i class="fas fa-user-plus"></i> Join PACT</a>
+      <a href="annual-reports.html" class="btn-ghost-dark"><i class="fas fa-chart-bar"></i> Annual Reports</a>
+    </div>
+  </div>
+
+</div>
+<!-- <?php include 'includes/footer.php'; ?> -->
+
+<script>
+function filterDl(btn, cat) {
+  document.querySelectorAll('.dl-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.dl-section').forEach(s => {
+    s.style.display = (cat === 'all' || s.dataset.cat === cat) ? '' : 'none';
+  });
+}
+</script>
+</body>
+</html>

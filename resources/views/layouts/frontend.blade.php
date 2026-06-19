@@ -87,18 +87,18 @@
       <div class="nav-item">
         <div class="nav-link">Members <i class="fas fa-chevron-down chevron"></i></div>
         <div class="dropdown">
-          <a href="#"><i class="fas fa-user-plus"></i> Become a Member</a>
+          <a href="{{ route('become-member') }}"><i class="fas fa-user-plus"></i> Become a Member</a>
           <a href="#"><i class="fas fa-address-book"></i> Members Directory</a>
           <a href="#"><i class="fas fa-bell"></i> Member Circulars</a>
           <a href="#"><i class="fas fa-newspaper"></i> Newsletter</a>
-          <a href="#"><i class="fas fa-download"></i> Downloads</a>
+          <a href="{{ route('downloads') }}"><i class="fas fa-download"></i> Downloads</a>
         </div>
       </div>
       <div class="nav-item">
         <div class="nav-link">Activities <i class="fas fa-chevron-down chevron"></i></div>
         <div class="dropdown">
-          <a href="#"><i class="fas fa-calendar-alt"></i> Events</a>
-          <a href="#"><i class="fas fa-images"></i> Photo Gallery</a>
+          <a href="{{ route('events') }}"><i class="fas fa-calendar-alt"></i> Events</a>
+          <a href="{{ route('gallery') }}"><i class="fas fa-images"></i> Photo Gallery</a>
           <a href="#"><i class="fas fa-chalkboard"></i> Seminars &amp; Workshop</a>
           <a href="#"><i class="fas fa-cricket"></i> PACT Sports Events</a>
           <a href="#"><i class="fas fa-handshake"></i> Fellowship Meets</a>
@@ -126,8 +126,8 @@
     </nav>
 
     <div class="header-actions">
-      <button class="btn-outline-sm">Member Login</button>
-      <button class="btn-cta">Join P A C T <i class="fas fa-arrow-right" style="font-size:11px"></i></button>
+      <a href="{{ route('login') }}" class="btn-outline-sm" style="text-decoration:none; display:inline-flex; align-items:center;">Member Login</a>
+      <a href="{{ route('become-member') }}" class="btn-cta" style="text-decoration:none;">Join P A C T <i class="fas fa-arrow-right" style="font-size:11px"></i></a>
     </div>
   </div>
 </header>
@@ -171,18 +171,18 @@
     <div class="fcol">
       <h6>Members</h6>
       <ul>
-        <li><a href="#"><i class="fas fa-chevron-right"></i>Become a Member</a></li>
+        <li><a href="{{ route('become-member') }}"><i class="fas fa-chevron-right"></i>Become a Member</a></li>
         <li><a href="#"><i class="fas fa-chevron-right"></i>Directory</a></li>
         <li><a href="#"><i class="fas fa-chevron-right"></i>Newsletter</a></li>
-        <li><a href="#"><i class="fas fa-chevron-right"></i>Downloads</a></li>
+        <li><a href="{{ route('downloads') }}"><i class="fas fa-chevron-right"></i>Downloads</a></li>
         <li><a href="#"><i class="fas fa-chevron-right"></i>President's Message</a></li>
       </ul>
     </div>
     <div class="fcol">
       <h6>Activities</h6>
       <ul>
-        <li><a href="#"><i class="fas fa-chevron-right"></i>Events</a></li>
-        <li><a href="#"><i class="fas fa-chevron-right"></i>Gallery</a></li>
+        <li><a href="{{ route('events') }}"><i class="fas fa-chevron-right"></i>Events</a></li>
+        <li><a href="{{ route('gallery') }}"><i class="fas fa-chevron-right"></i>Gallery</a></li>
         <li><a href="#"><i class="fas fa-chevron-right"></i>Seminars</a></li>
         <li><a href="#"><i class="fas fa-chevron-right"></i>Premier League</a></li>
         <li><a href="#"><i class="fas fa-chevron-right"></i>Fellowship Meets</a></li>

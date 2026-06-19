@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Photo Gallery – P A C T Punjab & Chandigarh</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="pact-common.css">
+<style>
+.album-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-bottom:80px}
+.album-card{border-radius:18px;overflow:hidden;cursor:pointer;position:relative;
+  aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-size:64px;
+  transition:transform .3s;border:1px solid var(--border);background:#fff;}
+.album-card:hover{transform:scale(1.02);box-shadow:var(--card-shadow-hover)}
+.album-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,17,31,.9) 0%,transparent 50%);
+  opacity:0;transition:opacity .3s;display:flex;flex-direction:column;justify-content:flex-end;padding:22px}
+.album-card:hover .album-overlay{opacity:1}
+.album-cat{font-size:10px;font-weight:700;color:var(--gold2);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px}
+.album-title{font-size:15px;font-weight:800;color:#fff;line-height:1.3}
+.album-count{font-size:11px;color:rgba(255,255,255,.5);margin-top:4px}
+.album-card-wide{grid-column:span 2}
+.album-card-tall{grid-row:span 2}
+
+/* Lightbox */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(7,17,31,.95);z-index:2000;
+  align-items:center;justify-content:center;flex-direction:column;gap:20px}
+.lightbox.open{display:flex}
+.lb-close{position:absolute;top:20px;right:24px;width:40px;height:40px;border-radius:10px;
+  background:rgba(255,255,255,.1);border:none;color:#fff;font-size:18px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;}
+.lb-content{background:rgba(255,255,255,.06);border-radius:16px;padding:60px;font-size:80px;
+  border:1px solid rgba(255,255,255,.1);}
+.lb-caption{font-size:15px;font-weight:700;color:#fff;text-align:center}
+.lb-sub{font-size:12px;color:rgba(255,255,255,.4);margin-top:4px;text-align:center}
+.lb-nav{display:flex;gap:12px;margin-top:8px}
+.lb-nav-btn{padding:9px 20px;border-radius:20px;border:1.5px solid rgba(255,255,255,.2);
+  background:transparent;color:#fff;font-family:'Poppins',sans-serif;font-size:13px;cursor:pointer;transition:all .2s}
+.lb-nav-btn:hover{background:rgba(255,255,255,.1)}
+
+@media(max-width:900px){.album-grid{grid-template-columns:1fr 1fr}.album-card-wide{grid-column:span 1}}
+@media(max-width:600px){.album-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<!-- <?php include 'includes/header.php'; ?> -->
+<div class="page-hero">
+  <div class="hero-glow"></div><div class="hero-glow2"></div>
+  <div class="page-hero-inner">
+    <div class="breadcrumb">
+      <a href="index.html"><i class="fas fa-home"></i> Home</a><i class="fas fa-chevron-right"></i>
+      <a href="#">Activities</a><i class="fas fa-chevron-right"></i>
+      <span class="active">Photo Gallery</span>
+    </div>
+    <div class="page-hero-tag"><span>Activities</span></div>
+    <h1>Photo <span>Gallery</span></h1>
+    <p>Moments and memories from PACT events — AGMs, sports days, fellowship meets, CSR drives, seminars, and award nights across Punjab & Chandigarh.</p>
+    <div class="hero-chips">
+      <div class="hero-chip"><i class="fas fa-images"></i> 500+ Photos</div>
+      <div class="hero-chip"><i class="fas fa-calendar-alt"></i> All Events</div>
+      <div class="hero-chip"><i class="fas fa-video"></i> Event Videos</div>
+    </div>
+  </div>
+</div>
+<div class="page-body">
+  <div class="eyebrow">Our Moments</div>
+  <h2 class="sec-title" style="margin-bottom:10px">Events <span class="hl">Gallery</span></h2>
+  <p class="sec-sub">Click any album to explore photos from that event.</p>
+
+  <div class="album-grid">
+    <div class="album-card album-card-wide" style="background:linear-gradient(135deg,#0C2F5E,#1A3C6E)" onclick="openLb('AGM & Annual Meet','🏛️','Annual General Meeting & flagship events')">
+      🏛️
+      <div class="album-overlay">
+        <div class="album-cat">AGM & Annual Meet</div>
+        <div class="album-title">Annual General Meeting & Flagship Events</div>
+        <div class="album-count">48 photos</div>
+      </div>
+    </div>
+    <div class="album-card" style="background:linear-gradient(135deg,#064E3B,#059669)" onclick="openLb('Compass Premier League','🏏','Sports events & CPL cricket tournament')">
+      🏏
+      <div class="album-overlay">
+        <div class="album-cat">Sports</div>
+        <div class="album-title">Compass Premier League 2026</div>
+        <div class="album-count">64 photos</div>
+      </div>
+    </div>
+    <div class="album-card" style="background:linear-gradient(135deg,#2E1065,#6D28D9)" onclick="openLb('Seminars & Workshops','🎓','Knowledge sessions & industry workshops')">
+      🎓
+      <div class="album-overlay">
+        <div class="album-cat">Seminars</div>
+        <div class="album-title">Seminars & Workshops</div>
+        <div class="album-count">36 photos</div>
+      </div>
+    </div>
+    <div class="album-card" style="background:linear-gradient(135deg,#78350F,#D97706)" onclick="openLb('Diwali Milan 2025','🪔','Festive fellowship & cultural events')">
+      🪔
+      <div class="album-overlay">
+        <div class="album-cat">Fellowship</div>
+        <div class="album-title">Diwali Milan 2025</div>
+        <div class="album-count">52 photos</div>
+      </div>
+    </div>
+    <div class="album-card" style="background:linear-gradient(135deg,#1E3A5F,#2563EB)" onclick="openLb('CSR Activities','❤️','Community welfare & health camps')">
+      ❤️
+      <div class="album-overlay">
+        <div class="album-cat">CSR</div>
+        <div class="album-title">CSR & Community Activities</div>
+        <div class="album-count">28 photos</div>
+      </div>
+    </div>
+    <div class="album-card" style="background:linear-gradient(135deg,#7C1D1D,#DC2626)" onclick="openLb('Awards Night','🏆','PACT Excellence Awards ceremony')">
+      🏆
+      <div class="album-overlay">
+        <div class="album-cat">Awards</div>
+        <div class="album-title">PACT Excellence Awards Night</div>
+        <div class="album-count">44 photos</div>
+      </div>
+    </div>
+    <div class="album-card album-card-wide" style="background:linear-gradient(135deg,#0C4A6E,#0284C7)" onclick="openLb('Office & Team','📸','PACT secretariat & leadership photos')">
+      📸
+      <div class="album-overlay">
+        <div class="album-cat">PACT Team</div>
+        <div class="album-title">Office, Secretariat & Leadership</div>
+        <div class="album-count">22 photos</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:center;margin-bottom:80px">
+    <div class="pagination">
+      <div class="page-item disabled"><i class="fas fa-chevron-left" style="font-size:11px"></i></div>
+      <div class="page-item active">1</div>
+      <div class="page-item">2</div>
+      <div class="page-item">3</div>
+      <div class="page-item"><i class="fas fa-chevron-right" style="font-size:11px"></i></div>
+    </div>
+  </div>
+
+  <div class="cta-band-red">
+    <div class="cta-band-text">
+      <h3>Share Your PACT Moments</h3>
+      <p>Members can submit event photos for inclusion in the official PACT gallery. Send your photos to media@pact.org.in.</p>
+    </div>
+    <div class="cta-band-btns">
+      <a href="mailto:media@pact.org.in" class="btn-white"><i class="fas fa-camera"></i> Submit Photos</a>
+      <a href="events.html" class="btn-ghost-dark"><i class="fas fa-calendar-alt"></i> Upcoming Events</a>
+    </div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLb()">
+  <button class="lb-close" onclick="closeLb()"><i class="fas fa-xmark"></i></button>
+  <div class="lb-content" id="lbContent">📸</div>
+  <div class="lb-caption" id="lbCaption">—</div>
+  <div class="lb-sub" id="lbSub">—</div>
+  <div class="lb-nav">
+    <button class="lb-nav-btn"><i class="fas fa-chevron-left"></i> Previous</button>
+    <button class="lb-nav-btn">Next <i class="fas fa-chevron-right"></i></button>
+  </div>
+</div>
+
+<!-- <?php include 'includes/footer.php'; ?> -->
+<script>
+function openLb(title, ico, sub) {
+  document.getElementById('lbContent').textContent = ico;
+  document.getElementById('lbCaption').textContent = title;
+  document.getElementById('lbSub').textContent = sub;
+  document.getElementById('lightbox').classList.add('open');
+  event.stopPropagation();
+}
+function closeLb() { document.getElementById('lightbox').classList.remove('open'); }
+</script>
+</body>
+</html>

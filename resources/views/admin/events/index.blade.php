@@ -30,12 +30,13 @@
   <div class="card-header"><div class="card-title">All Events</div><div class="card-subtitle">{{ $data->firstItem()??0 }}–{{ $data->lastItem()??0 }} of {{ $data->total() }}</div></div>
   <div style="overflow-x:auto">
     <table class="data-table">
-      <thead><tr><th>Event ID</th><th>Name</th><th>Date</th><th>Location</th><th>Status</th><th>Actions</th></tr></thead>
+      <thead><tr><th>Event ID</th><th>Name</th><th>Category</th><th>Date</th><th>Location</th><th>Status</th><th>Actions</th></tr></thead>
       <tbody>
         @forelse($data as $item)
         <tr>
           <td style="font-weight:600;color:var(--primary);font-family:monospace">{{ $item->event_id }}</td>
           <td><div class="user-name">{{ $item->name }}</div></td>
+          <td style="color:var(--text-secondary)">{{ $item->category ?? '—' }}</td>
           <td style="color:var(--text-secondary)">{{ $item->event_date ? \Carbon\Carbon::parse($item->event_date)->format('d M Y') : '—' }}</td>
           <td style="color:var(--text-secondary)">{{ $item->location ?? '—' }}</td>
           <td>@php $cls=$item->status=='Cancelled'?'tag-rejected':($item->status=='Completed'?'tag-info':'tag-approved');@endphp<span class="tag {{ $cls }}">{{ $item->status }}</span></td>
@@ -48,7 +49,7 @@
           </td>
         </tr>
         @empty
-        <tr><td colspan="6" style="text-align:center;padding:40px;color:var(--text-muted)">No events found.</td></tr>
+        <tr><td colspan="7" style="text-align:center;padding:40px;color:var(--text-muted)">No events found.</td></tr>
         @endforelse
       </tbody>
     </table>
@@ -70,9 +71,11 @@
     <input type="hidden" id="eId"/>
     <div class="detail-grid" style="gap:14px">
       <div class="detail-item"><label>Event Name *</label><input type="text" class="form-input" id="eName"/></div>
+      <div class="detail-item"><label>Category</label><input type="text" class="form-input" id="eCategory" placeholder="e.g. Sports, CSR"/></div>
       <div class="detail-item"><label>Date *</label><input type="date" class="form-input" id="eDate"/></div>
       <div class="detail-item"><label>Location *</label><input type="text" class="form-input" id="eLocation"/></div>
       <div class="detail-item"><label>Status</label><select class="form-input" id="eStatus"><option>Active</option><option>Completed</option><option>Cancelled</option></select></div>
+      <div class="detail-item" style="grid-column:1/-1"><label>Description</label><textarea class="form-input" id="eDescription" rows="3"></textarea></div>
     </div>
     <div id="editModalError" class="form-error" style="display:none"></div>
   </div>
@@ -85,9 +88,11 @@
   <div class="modal-body">
     <div class="detail-grid" style="gap:14px">
       <div class="detail-item"><label>Event Name *</label><input type="text" class="form-input" id="aName"/></div>
+      <div class="detail-item"><label>Category</label><input type="text" class="form-input" id="aCategory" placeholder="e.g. Sports, CSR"/></div>
       <div class="detail-item"><label>Date *</label><input type="date" class="form-input" id="aDate"/></div>
       <div class="detail-item"><label>Location *</label><input type="text" class="form-input" id="aLocation"/></div>
       <div class="detail-item"><label>Status</label><select class="form-input" id="aStatus"><option>Active</option><option>Completed</option><option>Cancelled</option></select></div>
+      <div class="detail-item" style="grid-column:1/-1"><label>Description</label><textarea class="form-input" id="aDescription" rows="3"></textarea></div>
     </div>
     <div id="addError" class="form-error" style="display:none"></div>
   </div>
@@ -99,22 +104,21 @@
 @include('partials.crud-script')
 <script>
 function viewEvent(id){
-  crudView(`/admin/events/${id}/show`, d=>`
-    <div class="detail-grid">
-      ${detailRow('Event ID', d.event_id)}
-      ${detailRow('Name', d.name)}
-      ${detailRow('Date', d.event_date)}
-      ${detailRow('Location', d.location)}
-      ${detailRow('Status', d.status)}
-    </div>`);
+  crudEdit(`/admin/events/${id}`,d=>{
+    let h=`<div class="detail-grid"><div class="detail-item"><label>Event ID</label><div class="val">${d.event_id}</div></div><div class="detail-item"><label>Name</label><div class="val">${d.name}</div></div><div class="detail-item"><label>Category</label><div class="val">${d.category||'—'}</div></div><div class="detail-item"><label>Date</label><div class="val">${d.event_date}</div></div><div class="detail-item"><label>Location</label><div class="val">${d.location||'—'}</div></div><div class="detail-item"><label>Status</label><div class="val">${d.status}</div></div><div class="detail-item" style="grid-column:1/-1"><label>Description</label><div class="val">${d.description||'—'}</div></div></div>`;
+    document.getElementById('viewModalBody').innerHTML=h;openModal('viewModal');
+  });
 }
 function editEvent(id){
-  crudEdit(`/admin/events/${id}/show`, d=>{
+  crudEdit(`/admin/events/${id}`, d=>{
     document.getElementById('eId').value = d.id;
     document.getElementById('eName').value = d.name;
-    document.getElementById('eDate').value = d.event_date || '';
+    document.getElementById('eCategory').value = d.category || '';
+    document.getElementById('eDescription').value = d.description || '';
+    if(d.event_date) document.getElementById('eDate').value = d.event_date.split('T')[0];
     document.getElementById('eLocation').value = d.location || '';
     document.getElementById('eStatus').value = d.status;
+    openModal('editModal');
   });
 }
 function submitEdit(){
@@ -122,6 +126,8 @@ function submitEdit(){
   const fd=new FormData();
   fd.append('_method','PUT');
   fd.append('name',document.getElementById('eName').value);
+  fd.append('category',document.getElementById('eCategory').value);
+  fd.append('description',document.getElementById('eDescription').value);
   fd.append('event_date',document.getElementById('eDate').value);
   fd.append('location',document.getElementById('eLocation').value);
   fd.append('status',document.getElementById('eStatus').value);
@@ -130,6 +136,8 @@ function submitEdit(){
 function submitAdd(){
   const fd=new FormData();
   fd.append('name',document.getElementById('aName').value);
+  fd.append('category',document.getElementById('aCategory').value);
+  fd.append('description',document.getElementById('aDescription').value);
   fd.append('event_date',document.getElementById('aDate').value);
   fd.append('location',document.getElementById('aLocation').value);
   fd.append('status',document.getElementById('aStatus').value);

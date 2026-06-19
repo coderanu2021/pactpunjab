@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Download;
+use App\Models\Event;
+use App\Models\Album;
+use App\Models\MemberCategory;
 
 class FrontendController extends Controller
 {
@@ -67,5 +71,28 @@ class FrontendController extends Controller
 
    }
 
-   
+   public function become_member(){
+       // Fetch categories if needed for membership tiers
+       $categories = MemberCategory::all();
+       return view('frontend.become_member', compact('categories'));
+   }
+
+   public function downloads(){
+       // Fetch downloads
+       $downloads = Download::latest()->get();
+       return view('frontend.downloads', compact('downloads'));
+   }
+
+   public function events(){
+       // Fetch active events
+       $events = Event::where('status', 'Active')->orderBy('event_date', 'asc')->get();
+       return view('frontend.events', compact('events'));
+   }
+
+   public function gallery(){
+       // Fetch albums with their images
+       $albums = Album::with('images')->latest()->get();
+       return view('frontend.gallery', compact('albums'));
+   }
+
 }

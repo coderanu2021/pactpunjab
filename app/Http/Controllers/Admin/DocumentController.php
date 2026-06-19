@@ -89,12 +89,13 @@ class DocumentController extends Controller
     public function downloadStore(Request $request)
     {
         $request->validate([
-            'title'  => 'required|string|max:255',
-            'file'   => 'required|file|mimes:pdf,doc,docx,xlsx,zip|max:10240',
-            'status' => 'required|in:Active,Inactive',
+            'title'    => 'required|string|max:255',
+            'category' => 'nullable|string|max:255',
+            'file'     => 'required|file|mimes:pdf,doc,docx,xlsx,zip|max:10240',
+            'status'   => 'required|in:Active,Inactive',
         ]);
         $path = $request->file('file')->store('downloads', 'public');
-        Download::create(['title' => $request->title, 'file_path' => $path, 'status' => $request->status]);
+        Download::create(['title' => $request->title, 'category' => $request->category, 'file_path' => $path, 'status' => $request->status]);
         return response()->json(['success' => true, 'message' => 'File uploaded.']);
     }
 
@@ -102,15 +103,16 @@ class DocumentController extends Controller
     {
         $dl = Download::findOrFail($id);
         $request->validate([
-            'title'  => 'required|string|max:255',
-            'status' => 'required|in:Active,Inactive',
+            'title'    => 'required|string|max:255',
+            'category' => 'nullable|string|max:255',
+            'status'   => 'required|in:Active,Inactive',
         ]);
         if ($request->hasFile('file')) {
             $request->validate(['file' => 'file|mimes:pdf,doc,docx,xlsx,zip|max:10240']);
             Storage::disk('public')->delete($dl->file_path);
             $dl->file_path = $request->file('file')->store('downloads', 'public');
         }
-        $dl->update(['title' => $request->title, 'status' => $request->status, 'file_path' => $dl->file_path]);
+        $dl->update(['title' => $request->title, 'category' => $request->category, 'status' => $request->status, 'file_path' => $dl->file_path]);
         return response()->json(['success' => true, 'message' => 'File updated.']);
     }
 

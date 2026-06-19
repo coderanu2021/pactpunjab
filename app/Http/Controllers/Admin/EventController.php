@@ -35,14 +35,16 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'       => 'required|string|max:255',
-            'event_date' => 'required|date',
-            'location'   => 'required|string|max:255',
-            'status'     => 'required|in:Active,Completed,Cancelled',
+            'name'        => 'required|string|max:255',
+            'category'    => 'nullable|string|max:255',
+            'description' => 'nullable|string',
+            'event_date'  => 'required|date',
+            'location'    => 'required|string|max:255',
+            'status'      => 'required|in:Active,Completed,Cancelled',
         ]);
         $year   = now()->format('Y');
         $count  = Event::whereYear('created_at', $year)->count() + 1;
-        $data   = $request->only('name', 'event_date', 'location', 'status');
+        $data   = $request->only('name', 'category', 'description', 'event_date', 'location', 'status');
         $data['event_id'] = 'EVT-' . $year . '-' . str_pad($count, 3, '0', STR_PAD_LEFT);
         Event::create($data);
         return response()->json(['success' => true, 'message' => 'Event created successfully.']);
@@ -51,12 +53,14 @@ class EventController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name'       => 'required|string|max:255',
-            'event_date' => 'required|date',
-            'location'   => 'required|string|max:255',
-            'status'     => 'required|in:Active,Completed,Cancelled',
+            'name'        => 'required|string|max:255',
+            'category'    => 'nullable|string|max:255',
+            'description' => 'nullable|string',
+            'event_date'  => 'required|date',
+            'location'    => 'required|string|max:255',
+            'status'      => 'required|in:Active,Completed,Cancelled',
         ]);
-        Event::findOrFail($id)->update($request->only('name', 'event_date', 'location', 'status'));
+        Event::findOrFail($id)->update($request->only('name', 'category', 'description', 'event_date', 'location', 'status'));
         return response()->json(['success' => true, 'message' => 'Event updated.']);
     }
 

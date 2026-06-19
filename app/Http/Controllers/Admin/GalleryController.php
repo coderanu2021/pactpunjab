@@ -31,20 +31,22 @@ class GalleryController extends Controller
     public function albumStore(Request $request)
     {
         $request->validate([
-            'title'  => 'required|string|max:255',
-            'status' => 'required|in:Published,Draft',
+            'title'    => 'required|string|max:255',
+            'category' => 'nullable|string|max:255',
+            'status'   => 'required|in:Published,Draft',
         ]);
-        Album::create($request->only('title', 'status'));
+        Album::create($request->only('title', 'category', 'status'));
         return response()->json(['success' => true, 'message' => 'Album created.']);
     }
 
     public function albumUpdate(Request $request, $id)
     {
         $request->validate([
-            'title'  => 'required|string|max:255',
-            'status' => 'required|in:Published,Draft',
+            'title'    => 'required|string|max:255',
+            'category' => 'nullable|string|max:255',
+            'status'   => 'required|in:Published,Draft',
         ]);
-        Album::findOrFail($id)->update($request->only('title', 'status'));
+        Album::findOrFail($id)->update($request->only('title', 'category', 'status'));
         return response()->json(['success' => true, 'message' => 'Album updated.']);
     }
 

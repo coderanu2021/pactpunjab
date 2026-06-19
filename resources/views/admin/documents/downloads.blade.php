@@ -16,12 +16,13 @@
 </form>
 <div class="card">
   <div class="card-header"><div class="card-title">All Download Files</div><div class="card-subtitle">{{ $data->firstItem()??0 }}–{{ $data->lastItem()??0 }} of {{ $data->total() }}</div></div>
-  <div style="overflow-x:auto"><table class="data-table"><thead><tr><th>#</th><th>File Title</th><th>Filename</th><th>Status</th><th>Actions</th></tr></thead>
+  <div style="overflow-x:auto"><table class="data-table"><thead><tr><th>#</th><th>File Title</th><th>Category</th><th>Filename</th><th>Status</th><th>Actions</th></tr></thead>
   <tbody>
     @forelse($data as $item)
     <tr>
       <td style="color:var(--text-muted)">{{ $item->id }}</td>
       <td><div style="display:flex;align-items:center;gap:10px"><div style="width:34px;height:34px;border-radius:8px;background:var(--primary-soft);color:var(--primary);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-file-arrow-down"></i></div><div class="user-name">{{ $item->title }}</div></div></td>
+      <td style="color:var(--text-muted)">{{ $item->category ?? '—' }}</td>
       <td style="color:var(--text-muted);font-size:12px">{{ $item->file_path ? basename($item->file_path) : '—' }}</td>
       <td>@php $c=$item->status=='Active'?'tag-approved':'tag-rejected';@endphp<span class="tag {{ $c }}">{{ $item->status }}</span></td>
       <td><div class="action-group">
@@ -30,7 +31,7 @@
         <button class="icon-btn delete" onclick="crudDelete('/admin/documents/downloads/{{ $item->id }}','{{ addslashes($item->title) }}')"><i class="fa-solid fa-trash"></i></button>
       </div></td>
     </tr>
-    @empty<tr><td colspan="5" style="text-align:center;padding:40px;color:var(--text-muted)">No files.</td></tr>@endforelse
+    @empty<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--text-muted)">No files.</td></tr>@endforelse
   </tbody></table></div>
   <div style="padding:14px 20px;border-top:1px solid var(--border)">{{ $data->links('pagination::bootstrap-4') }}</div>
 </div>
@@ -40,6 +41,7 @@
   <div class="modal-body"><input type="hidden" id="eId"/>
     <div class="detail-grid" style="gap:14px">
       <div class="detail-item" style="grid-column:1/-1"><label>Title *</label><input type="text" class="form-input" id="eTitle"/></div>
+      <div class="detail-item"><label>Category</label><input type="text" class="form-input" id="eCategory" placeholder="e.g. Forms, Circulars"/></div>
       <div class="detail-item"><label>Status</label><select class="form-input" id="eStatus"><option value="Active">Active</option><option value="Inactive">Inactive</option></select></div>
     </div><div id="editModalError" class="form-error" style="display:none"></div>
   </div>
@@ -52,6 +54,7 @@
     <form id="addForm" enctype="multipart/form-data">
       <div class="detail-grid" style="gap:14px">
         <div class="detail-item" style="grid-column:1/-1"><label>File Title *</label><input type="text" class="form-input" name="title" placeholder="e.g. Membership Form 2025"/></div>
+        <div class="detail-item"><label>Category</label><input type="text" class="form-input" name="category" placeholder="e.g. Forms, Circulars"/></div>
         <div class="detail-item"><label>File *</label><input type="file" class="form-input" name="file" accept=".pdf,.doc,.docx,.xlsx,.zip"/></div>
         <div class="detail-item"><label>Status</label><select class="form-input" name="status"><option value="Active">Active</option><option value="Inactive">Inactive</option></select></div>
       </div><div id="addError" class="form-error" style="display:none"></div>
@@ -64,8 +67,8 @@
 @include('partials.crud-script')
 <script>
 function post(url,fd,errId,cb){fetch(url,{method:'POST',body:fd,headers:{'X-CSRF-TOKEN':_CSRF,'X-Requested-With':'XMLHttpRequest','Accept':'application/json'}}).then(r=>r.json()).then(res=>{if(res.success){showToast(res.message);cb();}else{const e=document.getElementById(errId);if(e){e.textContent=res.message;e.style.display='block';}else showToast(res.message,'error');}}).catch(()=>showToast('Network error','error'));}
-function editR(id){crudEdit(`/admin/documents/downloads/${id}`,d=>{document.getElementById('eId').value=d.id;document.getElementById('eTitle').value=d.title;document.getElementById('eStatus').value=d.status;});}
-function submitEdit(){const id=document.getElementById('eId').value;const fd=new FormData();fd.append('title',document.getElementById('eTitle').value);fd.append('status',document.getElementById('eStatus').value);post(`/admin/documents/downloads/${id}`,fd,'editModalError',()=>{closeModal('editModal');_reload();});}
+function editR(id){crudEdit(`/admin/documents/downloads/${id}`,d=>{document.getElementById('eId').value=d.id;document.getElementById('eTitle').value=d.title;document.getElementById('eCategory').value=d.category||'';document.getElementById('eStatus').value=d.status;});}
+function submitEdit(){const id=document.getElementById('eId').value;const fd=new FormData();fd.append('title',document.getElementById('eTitle').value);fd.append('category',document.getElementById('eCategory').value);fd.append('status',document.getElementById('eStatus').value);post(`/admin/documents/downloads/${id}`,fd,'editModalError',()=>{closeModal('editModal');_reload();});}
 function submitAdd(){const form=document.getElementById('addForm');const fd=new FormData(form);post('/admin/documents/downloads/store',fd,'addError',()=>{closeModal('addModal');_reload();});}
 </script>
 @endsection

@@ -82,22 +82,42 @@ class MemberController extends Controller
     public function categoryStore(Request $request)
     {
         $request->validate([
-            'name'       => 'required|string|unique:member_categories,name',
-            'annual_fee' => 'required|numeric|min:0',
-            'status'     => 'required|in:Active,Inactive',
+            'name'        => 'required|string|unique:member_categories,name',
+            'description' => 'nullable|string',
+            'features'    => 'nullable|string',
+            'is_popular'  => 'nullable|boolean',
+            'annual_fee'  => 'required|numeric|min:0',
+            'status'      => 'required|in:Active,Inactive',
         ]);
-        MemberCategory::create($request->only('name', 'annual_fee', 'status'));
+        $data = $request->only('name', 'description', 'is_popular', 'annual_fee', 'status');
+        if ($request->filled('features')) {
+            $data['features'] = array_map('trim', explode("\n", $request->features));
+        } else {
+            $data['features'] = [];
+        }
+        $data['is_popular'] = $request->has('is_popular') ? true : false;
+        MemberCategory::create($data);
         return response()->json(['success' => true, 'message' => 'Category added.']);
     }
 
     public function categoryUpdate(Request $request, $id)
     {
         $request->validate([
-            'name'       => 'required|string|unique:member_categories,name,' . $id,
-            'annual_fee' => 'required|numeric|min:0',
-            'status'     => 'required|in:Active,Inactive',
+            'name'        => 'required|string|unique:member_categories,name,' . $id,
+            'description' => 'nullable|string',
+            'features'    => 'nullable|string',
+            'is_popular'  => 'nullable|boolean',
+            'annual_fee'  => 'required|numeric|min:0',
+            'status'      => 'required|in:Active,Inactive',
         ]);
-        MemberCategory::findOrFail($id)->update($request->only('name', 'annual_fee', 'status'));
+        $data = $request->only('name', 'description', 'annual_fee', 'status');
+        if ($request->filled('features')) {
+            $data['features'] = array_map('trim', explode("\n", $request->features));
+        } else {
+            $data['features'] = [];
+        }
+        $data['is_popular'] = $request->has('is_popular') && $request->is_popular == '1' ? true : false;
+        MemberCategory::findOrFail($id)->update($data);
         return response()->json(['success' => true, 'message' => 'Category updated.']);
     }
 

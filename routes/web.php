@@ -30,6 +30,10 @@ Route::get('/special-invitees', [FrontendController::class, 'special_invitees'])
 Route::get('/sub-committees', [FrontendController::class, 'sub_committees'])->name('sub-committees');
 Route::get('/advisory-board', [FrontendController::class, 'advisory_board'])->name('advisory-board');
 Route::get('/office-bearers', [FrontendController::class, 'office_bearers'])->name('office-bearers');
+Route::get('/become-member', [FrontendController::class, 'become_member'])->name('become-member');
+Route::get('/downloads', [FrontendController::class, 'downloads'])->name('downloads');
+Route::get('/events', [FrontendController::class, 'events'])->name('events');
+Route::get('/gallery', [FrontendController::class, 'gallery'])->name('gallery');
 Route::get('/login', [FrontendController::class, 'login'])->name('login');
 
 // ── ADMIN AUTH (public) ────────────────────────────────────────────────────
