@@ -10,9 +10,12 @@
   </div>
   <div class="header-actions">
     <span class="tag tag-approved" style="padding:6px 14px;font-size:12px"><i class="fa-solid fa-circle-dot"></i> Live</span>
-    <button class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
+    <button form="cms-home-form" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
   </div>
 </div>
+
+<form id="cms-home-form" action="{{ route('admin.cms.settings.update') }}" method="POST">
+  @csrf
 
 <!-- Section cards -->
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
@@ -29,23 +32,23 @@
     <div style="padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:16px">
       <div>
         <label class="cms-label">Hero Title</label>
-        <input type="text" class="cms-input" value="Punjab Association of Computer Traders" placeholder="Hero title…"/>
+        <input type="text" name="home_hero_title" class="cms-input" value="{{ $settings['home_hero_title'] ?? 'Punjab Association of Computer Traders' }}" placeholder="Hero title…"/>
       </div>
       <div>
         <label class="cms-label">Hero Sub-title</label>
-        <input type="text" class="cms-input" value="Empowering Technology Businesses" placeholder="Sub-title…"/>
+        <input type="text" name="home_hero_subtitle" class="cms-input" value="{{ $settings['home_hero_subtitle'] ?? 'Empowering Technology Businesses' }}" placeholder="Sub-title…"/>
       </div>
       <div style="grid-column:1/-1">
         <label class="cms-label">Hero Description</label>
-        <textarea class="cms-input" rows="3" placeholder="Brief introductory text for the hero section…">PACT Punjab connects and supports computer traders across Punjab, driving growth through association, certification, and community.</textarea>
+        <textarea name="home_hero_desc" class="cms-input" rows="3" placeholder="Brief introductory text for the hero section…">{{ $settings['home_hero_desc'] ?? 'PACT Punjab connects and supports computer traders across Punjab, driving growth through association, certification, and community.' }}</textarea>
       </div>
       <div>
         <label class="cms-label">CTA Button Text</label>
-        <input type="text" class="cms-input" value="Register Now" placeholder="Button label…"/>
+        <input type="text" name="home_hero_cta_text" class="cms-input" value="{{ $settings['home_hero_cta_text'] ?? 'Register Now' }}" placeholder="Button label…"/>
       </div>
       <div>
         <label class="cms-label">CTA Button Link</label>
-        <input type="text" class="cms-input" value="/registration-certificate" placeholder="/page-link"/>
+        <input type="text" name="home_hero_cta_link" class="cms-input" value="{{ $settings['home_hero_cta_link'] ?? '/registration-certificate' }}" placeholder="/page-link"/>
       </div>
     </div>
   </div>
@@ -61,11 +64,11 @@
     <div style="padding:20px;display:flex;flex-direction:column;gap:14px">
       <div>
         <label class="cms-label">Section Title</label>
-        <input type="text" class="cms-input" value="About PACT Punjab"/>
+        <input type="text" name="home_about_title" class="cms-input" value="{{ $settings['home_about_title'] ?? 'About PACT Punjab' }}"/>
       </div>
       <div>
         <label class="cms-label">Content</label>
-        <textarea class="cms-input" rows="4" placeholder="About text…">Founded in 1996, PACT Punjab is the leading association for computer traders in Punjab, providing certification, training, and networking opportunities.</textarea>
+        <textarea name="home_about_desc" class="cms-input" rows="4" placeholder="About text…">{{ $settings['home_about_desc'] ?? 'Founded in 1996, PACT Punjab is the leading association for computer traders in Punjab, providing certification, training, and networking opportunities.' }}</textarea>
       </div>
     </div>
   </div>
@@ -79,12 +82,12 @@
       </div>
     </div>
     <div style="padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:12px">
-      <div><label class="cms-label">Members Count</label><input type="text" class="cms-input" value="4,832+"/></div>
-      <div><label class="cms-label">Members Label</label><input type="text" class="cms-input" value="Registered Members"/></div>
-      <div><label class="cms-label">Years Count</label><input type="text" class="cms-input" value="28+"/></div>
-      <div><label class="cms-label">Years Label</label><input type="text" class="cms-input" value="Years of Service"/></div>
-      <div><label class="cms-label">Events Count</label><input type="text" class="cms-input" value="200+"/></div>
-      <div><label class="cms-label">Events Label</label><input type="text" class="cms-input" value="Events Organised"/></div>
+      <div><label class="cms-label">Members Count</label><input type="text" name="home_stat1_count" class="cms-input" value="{{ $settings['home_stat1_count'] ?? '4,832+' }}"/></div>
+      <div><label class="cms-label">Members Label</label><input type="text" name="home_stat1_label" class="cms-input" value="{{ $settings['home_stat1_label'] ?? 'Registered Members' }}"/></div>
+      <div><label class="cms-label">Years Count</label><input type="text" name="home_stat2_count" class="cms-input" value="{{ $settings['home_stat2_count'] ?? '28+' }}"/></div>
+      <div><label class="cms-label">Years Label</label><input type="text" name="home_stat2_label" class="cms-input" value="{{ $settings['home_stat2_label'] ?? 'Years of Service' }}"/></div>
+      <div><label class="cms-label">Events Count</label><input type="text" name="home_stat3_count" class="cms-input" value="{{ $settings['home_stat3_count'] ?? '200+' }}"/></div>
+      <div><label class="cms-label">Events Label</label><input type="text" name="home_stat3_label" class="cms-input" value="{{ $settings['home_stat3_label'] ?? 'Events Organised' }}"/></div>
     </div>
   </div>
 
@@ -97,13 +100,14 @@
       </div>
     </div>
     <div style="padding:20px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
-      <div><label class="cms-label">Phone Number</label><input type="text" class="cms-input" value="+91 98765 43210"/></div>
-      <div><label class="cms-label">Email Address</label><input type="text" class="cms-input" value="info@pactpunjab.in"/></div>
-      <div><label class="cms-label">Address</label><input type="text" class="cms-input" value="Ludhiana, Punjab"/></div>
+      <div><label class="cms-label">Phone Number</label><input type="text" name="contact_phone" class="cms-input" value="{{ $settings['contact_phone'] ?? '+91 98765 43210' }}"/></div>
+      <div><label class="cms-label">Email Address</label><input type="text" name="contact_email" class="cms-input" value="{{ $settings['contact_email'] ?? 'info@pactpunjab.com' }}"/></div>
+      <div><label class="cms-label">Location / City</label><input type="text" name="contact_address" class="cms-input" value="{{ $settings['contact_address'] ?? 'Chandigarh, India' }}"/></div>
     </div>
   </div>
 
 </div>
+</form>
 
 <div style="display:flex;justify-content:flex-end;margin-top:20px;gap:10px">
   <button class="btn btn-outline">Reset</button>

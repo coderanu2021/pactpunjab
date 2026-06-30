@@ -121,105 +121,32 @@ Advisory Board – P A C T Punjab & Chandigarh<
 
   <div class="advisor-grid">
 
+    @forelse($members as $member)
     <div class="advisor-card">
       <div class="advisor-card-top">
-        <div class="adv-avatar" style="background:linear-gradient(140deg,var(--gold),#C47D00)">HV</div>
+        <div class="adv-avatar" style="background:linear-gradient(140deg,var(--gold),#C47D00)">{{ strtoupper(substr($member->name, 0, 2)) }}</div>
         <div class="adv-meta">
-          <h4>H.S. Virk (IAS Retd.)</h4>
-          <div class="adv-title">Former Secretary, IT Dept., Govt. of Punjab</div>
-          <div class="adv-org">Independent Policy Consultant</div>
+          <h4>{{ $member->name }}</h4>
+          <div class="adv-title">{{ $member->designation ?? $member->type }}</div>
+          <div class="adv-org">Punjab</div>
           <div class="adv-domain-tags">
-            <span class="adv-tag">IT Policy</span><span class="adv-tag">e-Governance</span><span class="adv-tag">Digital India</span>
+            <span class="adv-tag">PACT</span><span class="adv-tag">Advisor</span>
           </div>
         </div>
       </div>
       <div class="advisor-card-body">
-        <div class="adv-bio">A 35-year veteran of the IAS, Mr. Virk served as Secretary of the IT Department under three governments of Punjab. He was instrumental in shaping Punjab's early e-governance initiatives and SMART Punjab programme. His connections across state and central government are invaluable to PACT's advocacy.</div>
+        <div class="adv-bio">A member of the advisory board providing strategic guidance to PACT.</div>
         <div class="adv-contributions">
           <h6><i class="fas fa-star"></i> Key Contributions to PACT</h6>
           <div class="adv-contrib-list">
-            <div class="adv-contrib-item"><i class="fas fa-check"></i>Facilitated PACT's engagement with Punjab Govt. on IT procurement policy</div>
-            <div class="adv-contrib-item"><i class="fas fa-check"></i>Reviewed PACT's pre-budget memorandum annually for 5 years</div>
-            <div class="adv-contrib-item"><i class="fas fa-check"></i>Chaired the Annual Report review committee (2021–24)</div>
+            <div class="adv-contrib-item"><i class="fas fa-check"></i>Advises the executive committee on policy matters</div>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="advisor-card">
-      <div class="advisor-card-top">
-        <div class="adv-avatar" style="background:linear-gradient(140deg,var(--blue2),var(--navy))">RJ</div>
-        <div class="adv-meta">
-          <h4>Rakesh Jain</h4>
-          <div class="adv-title">Former President, MAIT</div>
-          <div class="adv-org">Chairman, RJ Technology Group</div>
-          <div class="adv-domain-tags">
-            <span class="adv-tag">IT Industry</span><span class="adv-tag">Manufacturing</span><span class="adv-tag">Trade Policy</span>
-          </div>
-        </div>
-      </div>
-      <div class="advisor-card-body">
-        <div class="adv-bio">A stalwart of the Indian IT industry with 40+ years experience, Mr. Jain served two terms as President of MAIT (Manufacturers' Association for IT). His deep understanding of the IT value chain from manufacturing to retail makes him PACT's most knowledgeable advisor on trade policy.</div>
-        <div class="adv-contributions">
-          <h6><i class="fas fa-star"></i> Key Contributions to PACT</h6>
-          <div class="adv-contrib-list">
-            <div class="adv-contrib-item"><i class="fas fa-check"></i>Established PACT's relationship with MAIT national body</div>
-            <div class="adv-contrib-item"><i class="fas fa-check"></i>Guided PACT's GST advocacy during 2017 rollout</div>
-            <div class="adv-contrib-item"><i class="fas fa-check"></i>Keynote speaker at Annual Meet 2022 and 2024</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="advisor-card">
-      <div class="advisor-card-top">
-        <div class="adv-avatar" style="background:linear-gradient(140deg,#059669,#064E3B)">KM</div>
-        <div class="adv-meta">
-          <h4>Kavita Mehrotra</h4>
-          <div class="adv-title">MD, KM Digital Solutions</div>
-          <div class="adv-org">Board Member, NASSCOM North India</div>
-          <div class="adv-domain-tags">
-            <span class="adv-tag">NASSCOM</span><span class="adv-tag">IT Services</span><span class="adv-tag">Women in IT</span>
-          </div>
-        </div>
-      </div>
-      <div class="advisor-card-body">
-        <div class="adv-bio">One of North India's most respected IT entrepreneurs, Ms. Mehrotra built a 500-person IT services company from scratch. Her seat on NASSCOM's North India Board gives PACT access to the national IT services policy conversation. She champions women's participation in Punjab's IT sector.</div>
-        <div class="adv-contributions">
-          <h6><i class="fas fa-star"></i> Key Contributions to PACT</h6>
-          <div class="adv-contrib-list">
-            <div class="adv-contrib-item"><i class="fas fa-check"></i>Drives PACT's women IT entrepreneurs initiative</div>
-            <div class="adv-contrib-item"><i class="fas fa-check"></i>Facilitates NASSCOM partnership for member upskilling</div>
-            <div class="adv-contrib-item"><i class="fas fa-check"></i>Mentors Young IT Entrepreneurs SIG members</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="advisor-card">
-      <div class="advisor-card-top">
-        <div class="adv-avatar" style="background:linear-gradient(140deg,#7C3AED,#4C1D95)">SP</div>
-        <div class="adv-meta">
-          <h4>Satish Puri</h4>
-          <div class="adv-title">Retired Commissioner of Customs</div>
-          <div class="adv-org">Senior Tax Consultant</div>
-          <div class="adv-domain-tags">
-            <span class="adv-tag">Customs</span><span class="adv-tag">Import Policy</span><span class="adv-tag">GST</span>
-          </div>
-        </div>
-      </div>
-      <div class="advisor-card-body">
-        <div class="adv-bio">A retired Commissioner of Customs with specialist expertise in IT hardware import regulations, Mr. Puri helps PACT navigate India's complex customs and import policy landscape. His guidance has saved member businesses crores in unnecessary duties and compliance costs.</div>
-        <div class="adv-contributions">
-          <h6><i class="fas fa-star"></i> Key Contributions to PACT</h6>
-          <div class="adv-contrib-list">
-            <div class="adv-contrib-item"><i class="fas fa-check"></i>Advised PACT on Customs duty anomalies affecting IT hardware</div>
-            <div class="adv-contrib-item"><i class="fas fa-check"></i>Runs annual import policy seminar for Hardware SIG members</div>
-            <div class="adv-contrib-item"><i class="fas fa-check"></i>Represents PACT in customs tribunal appearances</div>
-          </div>
-        </div>
-      </div>
-    </div>
+    @empty
+    <div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted)">No advisory board members found. Please add them from the Admin Panel CMS.</div>
+    @endforelse
 
   </div>
 

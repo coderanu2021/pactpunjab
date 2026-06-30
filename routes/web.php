@@ -34,6 +34,14 @@ Route::get('/become-member', [FrontendController::class, 'become_member'])->name
 Route::get('/downloads', [FrontendController::class, 'downloads'])->name('downloads');
 Route::get('/events', [FrontendController::class, 'events'])->name('events');
 Route::get('/gallery', [FrontendController::class, 'gallery'])->name('gallery');
+Route::get('/advisory-services', [FrontendController::class, 'advisory_services'])->name('advisory-services');
+Route::get('/conference-hall', [FrontendController::class, 'conference_hall'])->name('conference-hall');
+Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
+Route::get('/grievance', [FrontendController::class, 'grievance'])->name('grievance');
+Route::get('/gst-helpdesk', [FrontendController::class, 'gst_helpdesk'])->name('gst-helpdesk');
+Route::get('/media-coverage', [FrontendController::class, 'media_coverage'])->name('media-coverage');
+Route::get('/media-kit', [FrontendController::class, 'media_kit'])->name('media-kit');
+Route::get('/press-release', [FrontendController::class, 'press_release'])->name('press-release');
 Route::get('/login', [FrontendController::class, 'login'])->name('login');
 
 // ── ADMIN AUTH (public) ────────────────────────────────────────────────────
@@ -170,9 +178,14 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     // ── CMS ───────────────────────────────────────────────────────────────
     Route::prefix('cms')->name('cms.')->group(function () {
         Route::get('/home',    [CmsController::class, 'home'])->name('home');
+        Route::post('/settings', [CmsController::class, 'updateSettings'])->name('settings.update');
         Route::get('/about',   [CmsController::class, 'about'])->name('about');
         Route::get('/contact', [CmsController::class, 'contact'])->name('contact');
         Route::get('/dynamic', [CmsController::class, 'dynamic'])->name('dynamic');
+        Route::resource('committee', App\Http\Controllers\Admin\CommitteeMemberController::class)->except(['create', 'edit', 'show']);
+        Route::resource('services', App\Http\Controllers\Admin\ServiceController::class)->except(['create', 'edit', 'show']);
+        Route::resource('faqs', App\Http\Controllers\Admin\FaqController::class)->except(['create', 'edit', 'show']);
+        Route::resource('media-items', App\Http\Controllers\Admin\MediaItemController::class)->except(['create', 'edit']);
     });
 
     // ── Settings ──────────────────────────────────────────────────────────

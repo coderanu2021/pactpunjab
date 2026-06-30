@@ -118,101 +118,25 @@ Special Invitees – P A C T Punjab & Chandigarh
 
   <div class="invitee-grid">
 
+    @forelse($members as $member)
     <div class="invitee-card">
       <div class="invitee-card-top" style="background:linear-gradient(180deg,rgba(30,80,162,.05),#fff)">
-        <div class="invitee-avatar" style="background:linear-gradient(140deg,var(--blue2),var(--navy))">AK</div>
-        <span class="invitee-badge" style="background:rgba(30,80,162,.1);color:var(--blue2)">Govt. Official</span>
-        <h4>Anil Kumar (IAS)</h4>
-        <div class="inv-org">Dept. of IT, Govt. of Punjab</div>
-        <div class="inv-city"><i class="fas fa-map-marker-alt"></i> Chandigarh</div>
+        <div class="invitee-avatar" style="background:linear-gradient(140deg,var(--blue2),var(--navy))">{{ strtoupper(substr($member->name, 0, 2)) }}</div>
+        <span class="invitee-badge" style="background:rgba(30,80,162,.1);color:var(--blue2)">{{ $member->designation ?? $member->type }}</span>
+        <h4>{{ $member->name }}</h4>
+        <div class="inv-org">Punjab</div>
+        <div class="inv-city"><i class="fas fa-map-marker-alt"></i> Punjab & Chandigarh</div>
       </div>
       <div class="invitee-card-body">
-        <p>Additional Secretary, IT Department, Government of Punjab. Represents the state government's perspective on digital infrastructure and IT trade policy in PACT's deliberations.</p>
+        <p>Special invitee to PACT representing key industry and government perspectives.</p>
         <div class="inv-expertise">
-          <span class="inv-tag">IT Policy</span><span class="inv-tag">Digital Punjab</span><span class="inv-tag">Govt. Procurement</span>
+          <span class="inv-tag">PACT</span><span class="inv-tag">Special Invitee</span>
         </div>
       </div>
     </div>
-
-    <div class="invitee-card">
-      <div class="invitee-card-top" style="background:linear-gradient(180deg,rgba(245,166,35,.05),#fff)">
-        <div class="invitee-avatar" style="background:linear-gradient(140deg,var(--gold),#C47D00)">RS</div>
-        <span class="invitee-badge" style="background:rgba(245,166,35,.12);color:#7A4A00">Industry Leader</span>
-        <h4>Rajesh Srivastava</h4>
-        <div class="inv-org">MAIT — National Council Member</div>
-        <div class="inv-city"><i class="fas fa-map-marker-alt"></i> Delhi / Chandigarh</div>
-      </div>
-      <div class="invitee-card-body">
-        <p>National Council Member of MAIT (Manufacturers' Association for IT) and veteran IT industry leader with 30+ years experience bridging the gap between manufacturers and traders.</p>
-        <div class="inv-expertise">
-          <span class="inv-tag">MAIT</span><span class="inv-tag">IT Manufacturing</span><span class="inv-tag">Trade Policy</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="invitee-card">
-      <div class="invitee-card-top" style="background:linear-gradient(180deg,rgba(124,58,237,.05),#fff)">
-        <div class="invitee-avatar" style="background:linear-gradient(140deg,#7C3AED,#4C1D95)">SK</div>
-        <span class="invitee-badge" style="background:rgba(124,58,237,.1);color:#7C3AED">Legal Expert</span>
-        <h4>Suresh Kapila</h4>
-        <div class="inv-org">GST & Tax Law Practitioner</div>
-        <div class="inv-city"><i class="fas fa-map-marker-alt"></i> Chandigarh</div>
-      </div>
-      <div class="invitee-card-body">
-        <p>Senior GST and indirect tax practitioner with deep expertise in IT hardware & software taxation. Advises PACT's GST Helpdesk and represents members in complex compliance matters.</p>
-        <div class="inv-expertise">
-          <span class="inv-tag">GST</span><span class="inv-tag">Indirect Tax</span><span class="inv-tag">Trade Law</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="invitee-card">
-      <div class="invitee-card-top" style="background:linear-gradient(180deg,rgba(5,150,105,.05),#fff)">
-        <div class="invitee-avatar" style="background:linear-gradient(140deg,#059669,#065F46)">PM</div>
-        <span class="invitee-badge" style="background:rgba(5,150,105,.1);color:#065F46">Industry Leader</span>
-        <h4>Poonam Mehta</h4>
-        <div class="inv-org">HP India — Channel Director (North)</div>
-        <div class="inv-city"><i class="fas fa-map-marker-alt"></i> Chandigarh</div>
-      </div>
-      <div class="invitee-card-body">
-        <p>Channel Director (North India) at HP India with responsibility for the entire Punjab & Chandigarh dealer network. Facilitates stronger OEM-trader relationships for PACT members.</p>
-        <div class="inv-expertise">
-          <span class="inv-tag">HP Channel</span><span class="inv-tag">OEM Relations</span><span class="inv-tag">Distribution</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="invitee-card">
-      <div class="invitee-card-top" style="background:linear-gradient(180deg,rgba(220,38,38,.05),#fff)">
-        <div class="invitee-avatar" style="background:linear-gradient(140deg,#DC2626,#991B1B)">VB</div>
-        <span class="invitee-badge" style="background:rgba(220,38,38,.1);color:#991B1B">Trade Expert</span>
-        <h4>Vijay Batra</h4>
-        <div class="inv-org">CII Punjab — IT Sector Chair</div>
-        <div class="inv-city"><i class="fas fa-map-marker-alt"></i> Ludhiana</div>
-      </div>
-      <div class="invitee-card-body">
-        <p>Chair of the IT Sector Committee at CII (Confederation of Indian Industry) Punjab Chapter. Represents PACT's interests in cross-industry policy forums and government engagement.</p>
-        <div class="inv-expertise">
-          <span class="inv-tag">CII</span><span class="inv-tag">Industry Policy</span><span class="inv-tag">Trade Advocacy</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="invitee-card">
-      <div class="invitee-card-top" style="background:linear-gradient(180deg,rgba(14,165,233,.05),#fff)">
-        <div class="invitee-avatar" style="background:linear-gradient(140deg,#0284C7,#0C4A6E)">MG</div>
-        <span class="invitee-badge" style="background:rgba(14,165,233,.1);color:#0369A1">Tech Expert</span>
-        <h4>Meera Gupta</h4>
-        <div class="inv-org">Cybersecurity Specialist & Author</div>
-        <div class="inv-city"><i class="fas fa-map-marker-alt"></i> Chandigarh</div>
-      </div>
-      <div class="invitee-card-body">
-        <p>Certified cybersecurity expert and published author advising PACT's SIG on digital security matters. Runs PACT's annual cybersecurity awareness seminar for IT trader members.</p>
-        <div class="inv-expertise">
-          <span class="inv-tag">Cybersecurity</span><span class="inv-tag">Data Protection</span><span class="inv-tag">IT Act</span>
-        </div>
-      </div>
-    </div>
+    @empty
+    <div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted)">No special invitees found. Please add them from the Admin Panel CMS.</div>
+    @endforelse
 
   </div>
 

@@ -156,31 +156,32 @@
 
 <div class="page-body">
 
+  @if($reports->count() > 0)
+  @php $featured = $reports->first(); @endphp
   <!-- FEATURED LATEST REPORT -->
   <div class="featured-report">
     <div>
       <div class="feat-rep-tag"><span>📄 Latest Report</span></div>
-      <h2>PACT Annual Report 2023–24</h2>
-      <p>The most comprehensive record of PACT's activities, events, financials, membership statistics, and advocacy outcomes for the year 2023–24. Approved at the Annual General Meeting 2024.</p>
+      <h2>{{ $featured->title }}</h2>
+      <p>The most comprehensive record of PACT's activities, events, financials, membership statistics, and advocacy outcomes for the year. Approved at the Annual General Meeting.</p>
       <div class="feat-rep-stats">
-        <div class="feat-rep-stat"><div class="n">620+</div><div class="l">Members</div></div>
-        <div class="feat-rep-stat"><div class="n">54</div><div class="l">Events</div></div>
-        <div class="feat-rep-stat"><div class="n">12</div><div class="l">Circulars</div></div>
-        <div class="feat-rep-stat"><div class="n">6</div><div class="l">CSR Drives</div></div>
+        <div class="feat-rep-stat"><div class="n">600+</div><div class="l">Members</div></div>
+        <div class="feat-rep-stat"><div class="n">50+</div><div class="l">Events</div></div>
       </div>
       <div class="btn-group">
-        <a href="#" class="btn-gold"><i class="fas fa-download"></i> Download PDF</a>
-        <a href="#" class="btn-ghost-dark"><i class="fas fa-eye"></i> View Online</a>
+        <a href="{{ asset('storage/' . $featured->file_path) }}" download class="btn-gold"><i class="fas fa-download"></i> Download PDF</a>
+        <a href="{{ asset('storage/' . $featured->file_path) }}" target="_blank" class="btn-ghost-dark"><i class="fas fa-eye"></i> View Online</a>
       </div>
     </div>
     <div class="report-cover">
       <div class="cover-logo">📋</div>
-      <div class="cover-year">2024</div>
+      <div class="cover-year">{{ $featured->created_at->format('Y') }}</div>
       <div class="cover-label">Annual Report</div>
       <div class="cover-pact">P A C T</div>
       <div class="cover-sub">Punjab & Chandigarh<br>IT Association</div>
     </div>
   </div>
+  @endif
 
   <!-- FILTER + REPORTS GRID -->
   <div class="section-block">
@@ -201,127 +202,37 @@
     </div>
 
     <div class="reports-grid">
-
+      @forelse($reports->skip(1) as $report)
+      @php
+        $colors = [
+            ['bg' => 'linear-gradient(135deg,#0C2F5E,#1E50A2)', 'color' => 'var(--gold2)'],
+            ['bg' => 'linear-gradient(135deg,#2E1065,#6D28D9)', 'color' => '#C4A0FF'],
+            ['bg' => 'linear-gradient(135deg,#064E3B,#059669)', 'color' => '#6EDA9F'],
+            ['bg' => 'linear-gradient(135deg,#78350F,#D97706)', 'color' => '#FED7AA'],
+            ['bg' => 'linear-gradient(135deg,#0C4A6E,#0284C7)', 'color' => '#7DD8FF'],
+            ['bg' => 'linear-gradient(135deg,#7C1D1D,#DC2626)', 'color' => '#FCA5A5'],
+        ];
+        $style = $colors[$loop->index % count($colors)];
+      @endphp
       <div class="rep-card">
-        <div class="rep-card-header" style="background:linear-gradient(135deg,#0C2F5E,#1E50A2)">
-          <div class="rep-year-badge" style="color:var(--gold2)">2023–24</div>
-          <div class="rep-title">Annual Report</div>
-          <div class="rep-subtitle">Approved at AGM 2024</div>
+        <div class="rep-card-header" style="background:{{ $style['bg'] }}">
+          <div class="rep-year-badge" style="color:{{ $style['color'] }}">{{ $report->created_at->format('Y') }}</div>
+          <div class="rep-title">{{ $report->title }}</div>
+          <div class="rep-subtitle">Annual Report</div>
         </div>
         <div class="rep-card-body">
           <div class="rep-highlights">
-            <div class="rep-hl"><i class="fas fa-users"></i> 620+ Active Members</div>
-            <div class="rep-hl"><i class="fas fa-calendar"></i> 54 Events Conducted</div>
-            <div class="rep-hl"><i class="fas fa-landmark"></i> 8 Govt. Representations</div>
-            <div class="rep-hl"><i class="fas fa-heart"></i> 6 CSR Initiatives</div>
+            <div class="rep-hl"><i class="fas fa-file-alt"></i> Official Record</div>
           </div>
           <div class="rep-footer">
-            <span class="rep-size"><i class="fas fa-file-pdf"></i> PDF · 4.2 MB</span>
-            <button class="rep-dl-btn"><i class="fas fa-download"></i> Download</button>
+            <span class="rep-size"><i class="fas fa-file-pdf"></i> PDF</span>
+            <a href="{{ asset('storage/' . $report->file_path) }}" download class="rep-dl-btn" style="text-decoration:none;"><i class="fas fa-download"></i> Download</a>
           </div>
         </div>
       </div>
-
-      <div class="rep-card">
-        <div class="rep-card-header" style="background:linear-gradient(135deg,#2E1065,#6D28D9)">
-          <div class="rep-year-badge" style="color:#C4A0FF">2022–23</div>
-          <div class="rep-title">Annual Report</div>
-          <div class="rep-subtitle">Approved at AGM 2023</div>
-        </div>
-        <div class="rep-card-body">
-          <div class="rep-highlights">
-            <div class="rep-hl"><i class="fas fa-users"></i> 605+ Active Members</div>
-            <div class="rep-hl"><i class="fas fa-calendar"></i> 48 Events Conducted</div>
-            <div class="rep-hl"><i class="fas fa-landmark"></i> 6 Govt. Representations</div>
-            <div class="rep-hl"><i class="fas fa-heart"></i> 4 CSR Initiatives</div>
-          </div>
-          <div class="rep-footer">
-            <span class="rep-size"><i class="fas fa-file-pdf"></i> PDF · 3.8 MB</span>
-            <button class="rep-dl-btn"><i class="fas fa-download"></i> Download</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="rep-card">
-        <div class="rep-card-header" style="background:linear-gradient(135deg,#064E3B,#059669)">
-          <div class="rep-year-badge" style="color:#6EDA9F">2021–22</div>
-          <div class="rep-title">Annual Report</div>
-          <div class="rep-subtitle">Approved at AGM 2022</div>
-        </div>
-        <div class="rep-card-body">
-          <div class="rep-highlights">
-            <div class="rep-hl"><i class="fas fa-users"></i> 592 Active Members</div>
-            <div class="rep-hl"><i class="fas fa-calendar"></i> 42 Events Conducted</div>
-            <div class="rep-hl"><i class="fas fa-landmark"></i> 5 Govt. Representations</div>
-            <div class="rep-hl"><i class="fas fa-heart"></i> 5 CSR Initiatives</div>
-          </div>
-          <div class="rep-footer">
-            <span class="rep-size"><i class="fas fa-file-pdf"></i> PDF · 3.5 MB</span>
-            <button class="rep-dl-btn"><i class="fas fa-download"></i> Download</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="rep-card">
-        <div class="rep-card-header" style="background:linear-gradient(135deg,#78350F,#D97706)">
-          <div class="rep-year-badge" style="color:#FED7AA">2020–21</div>
-          <div class="rep-title">Annual Report</div>
-          <div class="rep-subtitle">COVID-19 Resilience Year</div>
-        </div>
-        <div class="rep-card-body">
-          <div class="rep-highlights">
-            <div class="rep-hl"><i class="fas fa-users"></i> 576 Active Members</div>
-            <div class="rep-hl"><i class="fas fa-calendar"></i> 22 Events (Virtual)</div>
-            <div class="rep-hl"><i class="fas fa-landmark"></i> 9 Govt. Representations</div>
-            <div class="rep-hl"><i class="fas fa-heart"></i> 8 COVID Relief Drives</div>
-          </div>
-          <div class="rep-footer">
-            <span class="rep-size"><i class="fas fa-file-pdf"></i> PDF · 2.9 MB</span>
-            <button class="rep-dl-btn"><i class="fas fa-download"></i> Download</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="rep-card">
-        <div class="rep-card-header" style="background:linear-gradient(135deg,#0C4A6E,#0284C7)">
-          <div class="rep-year-badge" style="color:#7DD8FF">2019–20</div>
-          <div class="rep-title">Annual Report</div>
-          <div class="rep-subtitle">Approved at AGM 2020</div>
-        </div>
-        <div class="rep-card-body">
-          <div class="rep-highlights">
-            <div class="rep-hl"><i class="fas fa-users"></i> 558 Active Members</div>
-            <div class="rep-hl"><i class="fas fa-calendar"></i> 51 Events Conducted</div>
-            <div class="rep-hl"><i class="fas fa-landmark"></i> 7 Govt. Representations</div>
-            <div class="rep-hl"><i class="fas fa-heart"></i> 3 CSR Initiatives</div>
-          </div>
-          <div class="rep-footer">
-            <span class="rep-size"><i class="fas fa-file-pdf"></i> PDF · 3.1 MB</span>
-            <button class="rep-dl-btn"><i class="fas fa-download"></i> Download</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="rep-card">
-        <div class="rep-card-header" style="background:linear-gradient(135deg,#7C1D1D,#DC2626)">
-          <div class="rep-year-badge" style="color:#FCA5A5">2018–19</div>
-          <div class="rep-title">Annual Report</div>
-          <div class="rep-subtitle">Approved at AGM 2019</div>
-        </div>
-        <div class="rep-card-body">
-          <div class="rep-highlights">
-            <div class="rep-hl"><i class="fas fa-users"></i> 540 Active Members</div>
-            <div class="rep-hl"><i class="fas fa-calendar"></i> 46 Events Conducted</div>
-            <div class="rep-hl"><i class="fas fa-landmark"></i> 6 Govt. Representations</div>
-            <div class="rep-hl"><i class="fas fa-heart"></i> 3 CSR Initiatives</div>
-          </div>
-          <div class="rep-footer">
-            <span class="rep-size"><i class="fas fa-file-pdf"></i> PDF · 2.7 MB</span>
-            <button class="rep-dl-btn"><i class="fas fa-download"></i> Download</button>
-          </div>
-        </div>
-      </div>
-
+      @empty
+      <div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted)">No past reports available.</div>
+      @endforelse
     </div>
     <div style="display:flex;justify-content:center">
       <div class="pagination">

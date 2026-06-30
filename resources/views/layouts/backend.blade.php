@@ -242,6 +242,10 @@ select.form-input { cursor: pointer; }
         <a href="{{ route('admin.cms.about') }}"   class="nav-item {{ request()->routeIs('admin.cms.about')   ? 'active' : '' }}">About Us</a>
         <a href="{{ route('admin.cms.contact') }}" class="nav-item {{ request()->routeIs('admin.cms.contact') ? 'active' : '' }}">Contact Us</a>
         <a href="{{ route('admin.cms.dynamic') }}" class="nav-item {{ request()->routeIs('admin.cms.dynamic') ? 'active' : '' }}">Dynamic Pages</a>
+        <a href="{{ route('admin.cms.committee.index') }}" class="nav-item {{ request()->routeIs('admin.cms.committee.*') ? 'active' : '' }}">Committee Members</a>
+        <a href="{{ route('admin.cms.services.index') }}" class="nav-item {{ request()->routeIs('admin.cms.services.*') ? 'active' : '' }}">Services</a>
+        <a href="{{ route('admin.cms.faqs.index') }}" class="nav-item {{ request()->routeIs('admin.cms.faqs.*') ? 'active' : '' }}">FAQs</a>
+        <a href="{{ route('admin.cms.media-items.index') }}" class="nav-item {{ request()->routeIs('admin.cms.media-items.*') ? 'active' : '' }}">Media & Press</a>
       </div>
     </div>
 

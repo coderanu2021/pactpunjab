@@ -21,7 +21,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-            Schema::defaultStringLength(191);
+        Schema::defaultStringLength(191);
 
+        if (Schema::hasTable('settings')) {
+            $settings = \App\Models\Setting::pluck('value', 'key')->toArray();
+            \Illuminate\Support\Facades\View::share('settings', $settings);
+        }
     }
 }

@@ -87,173 +87,56 @@ Executive Committee – P A C T Punjab & Chandigarh
 
   <div class="committee-grid">
 
-    <!-- GST & Legal -->
-    <div class="com-card">
-      <div class="com-card-header" style="background:linear-gradient(135deg,#2E1065,#6D28D9)" data-abbr="GST">
-        <div class="com-header-top">
-          <div class="com-ico">⚖️</div>
-          <h3>GST, Taxation & Legal Committee</h3>
-        </div>
-        <p>The front-line committee keeping PACT members compliant and protected in an ever-changing tax environment.</p>
-        <div class="com-chair-row">
-          <div class="com-chair-avatar">SK</div>
-          <div class="com-chair-info"><strong>Suresh Kapila</strong><span>Chairperson · Tax Expert</span></div>
-        </div>
-      </div>
-      <div class="com-card-body">
-        <div class="com-mandate-title"><i class="fas fa-tasks"></i> Committee Mandate</div>
-        <div class="com-mandate-list">
-          <div class="com-mandate-item"><i class="fas fa-check-circle"></i>Monitor and disseminate GST notifications, circulars, and rate changes affecting IT traders</div>
-          <div class="com-mandate-item"><i class="fas fa-check-circle"></i>Run the PACT GST Helpdesk and respond to member compliance queries</div>
-          <div class="com-mandate-item"><i class="fas fa-check-circle"></i>Represent PACT in GST Council consultations and pre-budget memoranda</div>
-          <div class="com-mandate-item"><i class="fas fa-check-circle"></i>Organise annual GST compliance seminar for all members</div>
-        </div>
-        <div class="com-members-row">
-          <span><i class="fas fa-users"></i> 7 Members</span>
-          <a href="#">View Members <i class="fas fa-arrow-right" style="font-size:10px"></i></a>
-        </div>
-      </div>
-    </div>
+    @php
+        $groupedMembers = $members->groupBy('designation');
+        // Define some visual styles for the committees to maintain the page structure
+        $styles = [
+            ['bg' => 'linear-gradient(135deg,#2E1065,#6D28D9)', 'ico' => '⚖️'],
+            ['bg' => 'linear-gradient(135deg,#0C2F5E,#1E50A2)', 'ico' => '🎪'],
+            ['bg' => 'linear-gradient(135deg,#7C1D1D,#DC2626)', 'ico' => '⚡'],
+            ['bg' => 'linear-gradient(135deg,#064E3B,#059669)', 'ico' => '❤️'],
+            ['bg' => 'linear-gradient(135deg,#78350F,#D97706)', 'ico' => '🤝'],
+            ['bg' => 'linear-gradient(135deg,#0C4A6E,#0284C7)', 'ico' => '🏏'],
+        ];
+        $styleIndex = 0;
+    @endphp
 
-    <!-- Events -->
+    @forelse($groupedMembers as $committeeName => $group)
+    @php
+        $style = $styles[$styleIndex % count($styles)];
+        $styleIndex++;
+        $chair = $group->first(); // Assuming first is chair or we just pick the first
+    @endphp
     <div class="com-card">
-      <div class="com-card-header" style="background:linear-gradient(135deg,#0C2F5E,#1E50A2)" data-abbr="EVT">
+      <div class="com-card-header" style="background:{{ $style['bg'] }}" data-abbr="{{ strtoupper(substr(str_replace(['Committee', ' '], '', $committeeName ?? 'COM'), 0, 3)) }}">
         <div class="com-header-top">
-          <div class="com-ico">🎪</div>
-          <h3>Events & Activities Committee</h3>
+          <div class="com-ico">{{ $style['ico'] }}</div>
+          <h3>{{ $committeeName ?: 'General Sub Committee' }}</h3>
         </div>
-        <p>Plans and executes PACT's annual calendar of 50+ events — from the flagship Annual Meet to fellowship gatherings.</p>
+        <p>A dedicated sub-committee of PACT focusing on specific core areas of our mandate.</p>
+        
+        @if($chair)
         <div class="com-chair-row">
-          <div class="com-chair-avatar">PS</div>
-          <div class="com-chair-info"><strong>Priya Sharma</strong><span>Chairperson · PRO & Media</span></div>
+          <div class="com-chair-avatar">{{ strtoupper(substr($chair->name, 0, 2)) }}</div>
+          <div class="com-chair-info"><strong>{{ $chair->name }}</strong><span>Chairperson</span></div>
         </div>
+        @endif
       </div>
       <div class="com-card-body">
         <div class="com-mandate-title"><i class="fas fa-tasks"></i> Committee Mandate</div>
         <div class="com-mandate-list">
-          <div class="com-mandate-item"><i class="fas fa-check-circle"></i>Plan and execute the PACT Annual Meet — Punjab IT Mahakumbh</div>
-          <div class="com-mandate-item"><i class="fas fa-check-circle"></i>Organise fellowship meets, Diwali Milan, and other community events</div>
-          <div class="com-mandate-item"><i class="fas fa-check-circle"></i>Coordinate the Awards ceremony and felicitation programme</div>
-          <div class="com-mandate-item"><i class="fas fa-check-circle"></i>Manage event logistics, vendor relationships, and budgets</div>
+          <div class="com-mandate-item"><i class="fas fa-check-circle"></i>Executes the strategic goals and mandate assigned by the Executive Committee</div>
+          <div class="com-mandate-item"><i class="fas fa-check-circle"></i>Coordinates member participation and activities in this specific domain</div>
         </div>
         <div class="com-members-row">
-          <span><i class="fas fa-users"></i> 8 Members</span>
+          <span><i class="fas fa-users"></i> {{ $group->count() }} Members</span>
           <a href="#">View Members <i class="fas fa-arrow-right" style="font-size:10px"></i></a>
         </div>
       </div>
     </div>
-
-    <!-- Grievance -->
-    <div class="com-card">
-      <div class="com-card-header" style="background:linear-gradient(135deg,#7C1D1D,#DC2626)" data-abbr="GRC">
-        <div class="com-header-top">
-          <div class="com-ico">⚡</div>
-          <h3>Grievance & Dispute Resolution Committee</h3>
-        </div>
-        <p>An independent, fair mechanism for resolving trade disputes between PACT members and third parties.</p>
-        <div class="com-chair-row">
-          <div class="com-chair-avatar">PK</div>
-          <div class="com-chair-info"><strong>Pankaj Kapoor</strong><span>Chairperson · Joint Secretary</span></div>
-        </div>
-      </div>
-      <div class="com-card-body">
-        <div class="com-mandate-title"><i class="fas fa-tasks"></i> Committee Mandate</div>
-        <div class="com-mandate-list">
-          <div class="com-mandate-item"><i class="fas fa-check-circle"></i>Receive, register, and process grievance applications from members</div>
-          <div class="com-mandate-item"><i class="fas fa-check-circle"></i>Facilitate mediation and amicable resolution of disputes</div>
-          <div class="com-mandate-item"><i class="fas fa-check-circle"></i>Escalate unresolved matters to the Executive Committee</div>
-          <div class="com-mandate-item"><i class="fas fa-check-circle"></i>Maintain confidential records of all grievance proceedings</div>
-        </div>
-        <div class="com-members-row">
-          <span><i class="fas fa-users"></i> 5 Members</span>
-          <a href="#">View Members <i class="fas fa-arrow-right" style="font-size:10px"></i></a>
-        </div>
-      </div>
-    </div>
-
-    <!-- CSR -->
-    <div class="com-card">
-      <div class="com-card-header" style="background:linear-gradient(135deg,#064E3B,#059669)" data-abbr="CSR">
-        <div class="com-header-top">
-          <div class="com-ico">❤️</div>
-          <h3>CSR & Community Welfare Committee</h3>
-        </div>
-        <p>Drives PACT's community impact — from healthcare camps to education scholarships across Punjab & Chandigarh.</p>
-        <div class="com-chair-row">
-          <div class="com-chair-avatar">AM</div>
-          <div class="com-chair-info"><strong>Arun Mehta</strong><span>Chairperson · Vice President</span></div>
-        </div>
-      </div>
-      <div class="com-card-body">
-        <div class="com-mandate-title"><i class="fas fa-tasks"></i> Committee Mandate</div>
-        <div class="com-mandate-list">
-          <div class="com-mandate-item"><i class="fas fa-check-circle"></i>Plan and execute annual CSR calendar including health camps and education drives</div>
-          <div class="com-mandate-item"><i class="fas fa-check-circle"></i>Identify NGO partners and coordinate volunteer participation from members</div>
-          <div class="com-mandate-item"><i class="fas fa-check-circle"></i>Manage the PACT CSR fund and ensure transparent utilisation</div>
-          <div class="com-mandate-item"><i class="fas fa-check-circle"></i>Report CSR impact in the Annual Report</div>
-        </div>
-        <div class="com-members-row">
-          <span><i class="fas fa-users"></i> 6 Members</span>
-          <a href="#">View Members <i class="fas fa-arrow-right" style="font-size:10px"></i></a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Membership -->
-    <div class="com-card">
-      <div class="com-card-header" style="background:linear-gradient(135deg,#78350F,#D97706)" data-abbr="MEM">
-        <div class="com-header-top">
-          <div class="com-ico">🤝</div>
-          <h3>Membership & Outreach Committee</h3>
-        </div>
-        <p>Drives membership growth, member retention, and PACT's outreach to IT traders across the region.</p>
-        <div class="com-chair-row">
-          <div class="com-chair-avatar">RS</div>
-          <div class="com-chair-info"><strong>Rajinder Singh</strong><span>Chairperson · Vice President</span></div>
-        </div>
-      </div>
-      <div class="com-card-body">
-        <div class="com-mandate-title"><i class="fas fa-tasks"></i> Committee Mandate</div>
-        <div class="com-mandate-list">
-          <div class="com-mandate-item"><i class="fas fa-check-circle"></i>Drive membership recruitment campaigns across Punjab & Chandigarh</div>
-          <div class="com-mandate-item"><i class="fas fa-check-circle"></i>Process and verify new member applications</div>
-          <div class="com-mandate-item"><i class="fas fa-check-circle"></i>Ensure member retention through engagement and benefits communication</div>
-          <div class="com-mandate-item"><i class="fas fa-check-circle"></i>Maintain and update the Members Directory</div>
-        </div>
-        <div class="com-members-row">
-          <span><i class="fas fa-users"></i> 7 Members</span>
-          <a href="#">View Members <i class="fas fa-arrow-right" style="font-size:10px"></i></a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Sports -->
-    <div class="com-card">
-      <div class="com-card-header" style="background:linear-gradient(135deg,#0C4A6E,#0284C7)" data-abbr="SPT">
-        <div class="com-header-top">
-          <div class="com-ico">🏏</div>
-          <h3>Sports & Recreation Committee</h3>
-        </div>
-        <p>Builds camaraderie and community spirit through the Compass Premier League and other sporting events.</p>
-        <div class="com-chair-row">
-          <div class="com-chair-avatar">NB</div>
-          <div class="com-chair-info"><strong>Navdeep Bhatia</strong><span>Chairperson · Joint Treasurer</span></div>
-        </div>
-      </div>
-      <div class="com-card-body">
-        <div class="com-mandate-title"><i class="fas fa-tasks"></i> Committee Mandate</div>
-        <div class="com-mandate-list">
-          <div class="com-mandate-item"><i class="fas fa-check-circle"></i>Organise the annual Compass Premier League cricket tournament</div>
-          <div class="com-mandate-item"><i class="fas fa-check-circle"></i>Plan badminton, football, and other member sporting events</div>
-          <div class="com-mandate-item"><i class="fas fa-check-circle"></i>Coordinate venues, umpires, equipment, and refreshments</div>
-          <div class="com-mandate-item"><i class="fas fa-check-circle"></i>Manage trophies, prizes, and felicitation for sports winners</div>
-        </div>
-        <div class="com-members-row">
-          <span><i class="fas fa-users"></i> 7 Members</span>
-          <a href="#">View Members <i class="fas fa-arrow-right" style="font-size:10px"></i></a>
-        </div>
-      </div>
-    </div>
+    @empty
+    <div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted)">No sub-committees found. Please add them from the Admin Panel CMS.</div>
+    @endforelse
 
   </div>
 

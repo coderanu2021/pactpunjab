@@ -152,7 +152,7 @@ textarea.form-control{resize:vertical;min-height:100px}
     </div>
     <div class="page-hero-tag"><span>Membership</span></div>
     <h1>Join <span>P A C T</span></h1>
-    <p>Become part of Punjab & Chandigarh's largest and most impactful IT trade association. One membership — unlimited access to advocacy, services, events, and a 600+ strong network.</p>
+    <p>{{ $settings['page_become_member_intro'] ?? "Become part of Punjab & Chandigarh's largest and most impactful IT trade association. One membership — unlimited access to advocacy, services, events, and a 600+ strong network." }}</p>
     <div class="hero-chips">
       <div class="hero-chip"><i class="fas fa-users"></i> 600+ Active Members</div>
       <div class="hero-chip"><i class="fas fa-rupee-sign"></i> Affordable Annual Fee</div>

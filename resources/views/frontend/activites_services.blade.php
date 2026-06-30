@@ -160,101 +160,24 @@
       </div>
 
       <div class="act-grid">
-        <!-- Seminars -->
+        @forelse($services->where('category', 'Activity') as $service)
         <div class="act-card">
           <div class="act-thumb" style="background:linear-gradient(135deg,#1A1442,#3B1FA8)">
-            🎓
-            <span class="act-cat" style="background:#6D28D9">Seminars</span>
+            <i class="{{ $service->icon_class ?? 'fas fa-star' }}" style="color:#fff"></i>
+            <span class="act-cat" style="background:#6D28D9">{{ $service->category }}</span>
           </div>
           <div class="act-body">
-            <h4>Seminars & Workshops</h4>
-            <p>Regular knowledge-sharing sessions covering GST updates, IT policy changes, business strategy, and technology trends — delivered by industry experts and government officials.</p>
+            <h4>{{ $service->title }}</h4>
+            <p>{{ $service->description }}</p>
             <div class="act-footer">
-              <span class="act-tag"><i class="fas fa-calendar"></i> 10+ per year</span>
-              <a href="seminars.html" class="act-link">Explore <i class="fas fa-arrow-right" style="font-size:10px"></i></a>
+              <span class="act-tag"><i class="fas fa-calendar"></i> Regular</span>
+              <a href="#" class="act-link">Explore <i class="fas fa-arrow-right" style="font-size:10px"></i></a>
             </div>
           </div>
         </div>
-
-        <!-- Events -->
-        <div class="act-card">
-          <div class="act-thumb" style="background:linear-gradient(135deg,#0C2F5E,#1E50A2)">
-            🏛️
-            <span class="act-cat" style="background:#1E50A2">Events</span>
-          </div>
-          <div class="act-body">
-            <h4>Annual Meet & Major Events</h4>
-            <p>The crown jewel is P A C T's Annual Meet — Punjab IT Mahakumbh — an industry-wide gathering bringing together 600+ members, government officials, and industry leaders.</p>
-            <div class="act-footer">
-              <span class="act-tag"><i class="fas fa-calendar"></i> Flagship Annual Event</span>
-              <a href="events.html" class="act-link">Explore <i class="fas fa-arrow-right" style="font-size:10px"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Sports -->
-        <div class="act-card">
-          <div class="act-thumb" style="background:linear-gradient(135deg,#064E3B,#059669)">
-            🏏
-            <span class="act-cat" style="background:#059669">Sports</span>
-          </div>
-          <div class="act-body">
-            <h4>PACT Sports Events</h4>
-            <p>The Compass Premier League cricket tournament and other sports activities build camaraderie among members — keeping the community strong, healthy, and connected beyond business.</p>
-            <div class="act-footer">
-              <span class="act-tag"><i class="fas fa-calendar"></i> Annual Tournament</span>
-              <a href="sports.html" class="act-link">Explore <i class="fas fa-arrow-right" style="font-size:10px"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Fellowship -->
-        <div class="act-card">
-          <div class="act-thumb" style="background:linear-gradient(135deg,#78350F,#D97706)">
-            🤝
-            <span class="act-cat" style="background:#D97706">Fellowship</span>
-          </div>
-          <div class="act-body">
-            <h4>Fellowship Meets</h4>
-            <p>Informal networking gatherings — including seasonal celebrations like Diwali Milan — creating opportunities for members to build genuine relationships in a relaxed, community atmosphere.</p>
-            <div class="act-footer">
-              <span class="act-tag"><i class="fas fa-calendar"></i> Multiple per year</span>
-              <a href="fellowship.html" class="act-link">Explore <i class="fas fa-arrow-right" style="font-size:10px"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <!-- CSR -->
-        <div class="act-card">
-          <div class="act-thumb" style="background:linear-gradient(135deg,#1E3A5F,#2563EB)">
-            ❤️
-            <span class="act-cat" style="background:#2563EB">CSR</span>
-          </div>
-          <div class="act-body">
-            <h4>CSR & Community Activities</h4>
-            <p>Free eye operation camps, health check-up drives, scholarship programmes, and community welfare initiatives — P A C T gives back to the region that has given so much to its members.</p>
-            <div class="act-footer">
-              <span class="act-tag"><i class="fas fa-calendar"></i> Year-round</span>
-              <a href="csr.html" class="act-link">Explore <i class="fas fa-arrow-right" style="font-size:10px"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Gallery -->
-        <div class="act-card">
-          <div class="act-thumb" style="background:linear-gradient(135deg,#2E1065,#6D28D9)">
-            📸
-            <span class="act-cat" style="background:#7C3AED">Gallery</span>
-          </div>
-          <div class="act-body">
-            <h4>Photo Gallery</h4>
-            <p>A rich archive of P A C T's events, milestones, and moments — from AGMs and award nights to sports tournaments and CSR drives. Every picture tells the story of our community.</p>
-            <div class="act-footer">
-              <span class="act-tag"><i class="fas fa-images"></i> 500+ Photos</span>
-              <a href="gallery.html" class="act-link">Explore <i class="fas fa-arrow-right" style="font-size:10px"></i></a>
-            </div>
-          </div>
-        </div>
+        @empty
+        <div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted)">No activities found. Please add them from the Admin Panel CMS.</div>
+        @endforelse
       </div>
     </div>
   </div>
@@ -270,92 +193,23 @@
       </div>
 
       <div class="srv-list">
-        <a href="notifications.html" class="srv-row">
-          <div class="srv-ico b"><i class="fas fa-bell"></i></div>
+        @forelse($services->where('category', 'Service') as $service)
+        <a href="#" class="srv-row">
+          <div class="srv-ico {{ ['b', 'r', 'g', 'y', 'p', 't'][array_rand(['b', 'r', 'g', 'y', 'p', 't'])] }}">
+            <i class="{{ $service->icon_class ?? 'fas fa-star' }}"></i>
+          </div>
           <div class="srv-content">
-            <h4>Circulars & Notifications</h4>
-            <p>Stay current with the latest statutory GST notifications, TDS updates, Central Tax circulars, and member communications. P A C T curates and distributes all critical regulatory updates relevant to IT traders in Punjab & Chandigarh.</p>
+            <h4>{{ $service->title }}</h4>
+            <p>{{ $service->description }}</p>
             <div class="srv-tags">
-              <span class="srv-tag">GST Updates</span>
-              <span class="srv-tag">TDS Circulars</span>
-              <span class="srv-tag">e-Way Bill</span>
-              <span class="srv-tag">Central Tax</span>
+              <span class="srv-tag">PACT Service</span>
             </div>
           </div>
           <div class="srv-arrow"><i class="fas fa-arrow-right"></i></div>
         </a>
-
-        <a href="grievance.html" class="srv-row">
-          <div class="srv-ico r"><i class="fas fa-gavel"></i></div>
-          <div class="srv-content">
-            <h4>Grievance Cell</h4>
-            <p>An independent, confidential mechanism for resolving disputes between members, distributors, and third parties. P A C T facilitates fair, amicable resolution — protecting your business interests without the cost and delay of litigation.</p>
-            <div class="srv-tags">
-              <span class="srv-tag">Dispute Resolution</span>
-              <span class="srv-tag">Member Disputes</span>
-              <span class="srv-tag">Trade Issues</span>
-            </div>
-          </div>
-          <div class="srv-arrow"><i class="fas fa-arrow-right"></i></div>
-        </a>
-
-        <a href="gst-helpdesk.html" class="srv-row">
-          <div class="srv-ico y"><i class="fas fa-receipt"></i></div>
-          <div class="srv-content">
-            <h4>GST & Legal Helpdesk</h4>
-            <p>Expert guidance on GST compliance, e-Invoicing, e-Way Bills, ITC claims, and all legal matters affecting IT businesses. Our helpdesk team provides practical, actionable advice tailored to the specific challenges of IT traders.</p>
-            <div class="srv-tags">
-              <span class="srv-tag">GST Compliance</span>
-              <span class="srv-tag">e-Invoicing</span>
-              <span class="srv-tag">Legal Advisory</span>
-              <span class="srv-tag">ITC Claims</span>
-            </div>
-          </div>
-          <div class="srv-arrow"><i class="fas fa-arrow-right"></i></div>
-        </a>
-
-        <a href="advisory.html" class="srv-row">
-          <div class="srv-ico g"><i class="fas fa-comment-dots"></i></div>
-          <div class="srv-content">
-            <h4>Appeal & Advisory</h4>
-            <p>Strategic representation and guidance on government appeals, regulatory matters, and industry policy issues. When you need to navigate complex bureaucratic or legal processes, P A C T stands with you.</p>
-            <div class="srv-tags">
-              <span class="srv-tag">Govt. Appeals</span>
-              <span class="srv-tag">Policy Representation</span>
-              <span class="srv-tag">Strategic Advice</span>
-            </div>
-          </div>
-          <div class="srv-arrow"><i class="fas fa-arrow-right"></i></div>
-        </a>
-
-        <a href="conference-hall.html" class="srv-row">
-          <div class="srv-ico p"><i class="fas fa-building"></i></div>
-          <div class="srv-content">
-            <h4>Conference Hall</h4>
-            <p>State-of-the-art meeting and conference facilities at P A C T's Chandigarh headquarters — available to all members for board meetings, client presentations, training sessions, and corporate events.</p>
-            <div class="srv-tags">
-              <span class="srv-tag">Board Room</span>
-              <span class="srv-tag">Training Hall</span>
-              <span class="srv-tag">Event Space</span>
-              <span class="srv-tag">AV Equipment</span>
-            </div>
-          </div>
-          <div class="srv-arrow"><i class="fas fa-arrow-right"></i></div>
-        </a>
-
-        <a href="members-directory.html" class="srv-row">
-          <div class="srv-ico t"><i class="fas fa-address-book"></i></div>
-          <div class="srv-content">
-            <h4>Members Directory</h4>
-            <p>A comprehensive, searchable directory of all 600+ P A C T member businesses — with contact details, specialisations, and city locations. The go-to resource for finding trusted IT trade partners across Punjab & Chandigarh.</p>
-            <div class="srv-tags">
-              <span class="srv-tag">600+ Listings</span>
-              <span class="srv-tag">Searchable</span>
-              <span class="srv-tag">Verified Members</span>
-            </div>
-          </div>
-          <div class="srv-arrow"><i class="fas fa-arrow-right"></i></div>
-        </a>
+        @empty
+        <div style="text-align:center;padding:40px;color:var(--muted)">No services found. Please add them from the Admin Panel CMS.</div>
+        @endforelse
       </div>
     </div>
   </div>

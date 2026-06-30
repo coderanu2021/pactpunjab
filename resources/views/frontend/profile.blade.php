@@ -178,9 +178,11 @@ Profile
   <div class="intro-grid">
     <div class="intro-text">
       <div class="eyebrow">Who We Are</div>
-      <h2 class="sec-title">Punjab Association of<br><span class="hl">Computer Traders</span></h2>
-
-      <p><strong>Punjab Association of Computer Traders (P A C T)</strong> is the foremost representative body for IT entrepreneurs, traders, and businesses operating across Punjab and Chandigarh. Established in <strong>1996</strong>, P A C T has been the region's most trusted voice in the technology trade sector for nearly three decades.</p>
+      <div class="page-hero-tag"><span>About Us</span></div>
+      <h1>About <span>PACT</span></h1>
+      <p>{{ $settings['page_profile_intro'] ?? "The Punjab Association of Computer Traders (PACT) is the apex body representing over 600+ IT traders, retailers, distributors, and service providers across Punjab and Chandigarh." }}</p>
+      
+      <p>Established in <strong>1996</strong>, P A C T has been the region's most trusted voice in the technology trade sector for nearly three decades.</p>
 
       <p>Headquartered in <strong>Chandigarh</strong>, the association unites over <strong>600 member businesses</strong> spanning hardware trading, software services, IT peripherals, system integration, and allied sectors. Our geographic reach extends across <strong>11+ city-level associations</strong> throughout Punjab, making us the largest IT trade network in the region.</p>
 
@@ -223,16 +225,16 @@ Profile
   <div class="sec-title" style="margin-bottom:28px">Our <span class="hl">Mission, Vision & Values</span></div>
   <div class="mv-grid">
     <div class="mv-card mission">
-      <span class="mv-label">Mission</span>
       <div class="mv-ico">🎯</div>
-      <h3>Our Mission</h3>
-      <p>To represent, support, and empower IT traders and entrepreneurs across Punjab & Chandigarh — through advocacy, knowledge sharing, networking, and community-driven initiatives that drive sustainable business growth.</p>
+      <div class="mv-label">Our Mission</div>
+      <h3>To Unite & Protect</h3>
+      <p>{{ $settings['page_profile_mission'] ?? "To act as the apex body uniting all IT associations in Punjab & Chandigarh, safeguarding their business interests against unethical trade practices." }}</p>
     </div>
     <div class="mv-card vision">
-      <span class="mv-label">Vision</span>
-      <div class="mv-ico" style="background:rgba(30,80,162,.08);color:var(--blue2);font-size:22px">🔭</div>
-      <h3>Our Vision</h3>
-      <p>To be the most impactful IT trade association in North India — a body that shapes policy, accelerates innovation, and creates an ecosystem where every IT entrepreneur can thrive at the highest level.</p>
+      <div class="mv-ico">🔭</div>
+      <div class="mv-label">Our Vision</div>
+      <h3>Thriving IT Ecosystem</h3>
+      <p>{{ $settings['page_profile_vision'] ?? "To build a legally secure, transparent, and highly profitable IT trade ecosystem in the region, fostering mutual growth for all stakeholders." }}</p>
     </div>
     <div class="mv-card values">
       <span class="mv-label">Values</span>

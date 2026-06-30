@@ -29,8 +29,8 @@
     </div>
   </div>
   <div class="topbar-right">
-    <a href="tel:+916290910140"><i class="fas fa-phone-alt"></i> +91 94172-23355</a>
-    <a href="/cdn-cgi/l/email-protection#442d2a222b043425273034312a2e25266a272b29"><i class="fas fa-envelope"></i> <span class="__cf_email__" data-cfemail="82ebece4edc2f2e3e1f6f2f7ece8e3e0ace1edef">[email&#160;protected]</span></a>
+    <a href="tel:{{ $settings['contact_phone'] ?? '+919417223355' }}"><i class="fas fa-phone-alt"></i> {{ $settings['contact_phone'] ?? '+91 94172-23355' }}</a>
+    <a href="mailto:{{ $settings['contact_email'] ?? 'info@pact.org.in' }}"><i class="fas fa-envelope"></i> <span>{{ $settings['contact_email'] ?? 'info@pact.org.in' }}</span></a>
   </div>
 </div>
 
@@ -70,7 +70,7 @@
           <div class="dd-divider"></div>
           <a href="{{ route('awards-recognition') }}"><i class="fas fa-award"></i> Awards &amp; Recognition</a>
           <a href="{{ route('annual-reports') }}"><i class="fas fa-file-alt"></i> Annual Reports</a>
-          <a href="#"><i class="fas fa-map-marker-alt"></i> Contact Us</a>
+          <a href="{{ route('contact') }}"><i class="fas fa-map-marker-alt"></i> Contact Us</a>
         </div>
       </div>
       <div class="nav-item">
@@ -109,18 +109,18 @@
         <div class="nav-link">Services <i class="fas fa-chevron-down chevron"></i></div>
         <div class="dropdown">
           <a href="#"><i class="fas fa-bell"></i> Circulars &amp; Notifications</a>
-          <a href="#"><i class="fas fa-gavel"></i> Grievance Cell</a>
-          <a href="#"><i class="fas fa-building"></i> Conference Hall</a>
-          <a href="#"><i class="fas fa-receipt"></i> GST &amp; Legal Helpdesk</a>
-          <a href="#"><i class="fas fa-comment-dots"></i> Appeal &amp; Advisory</a>
+          <a href="{{ route('grievance') }}"><i class="fas fa-gavel"></i> Grievance Cell</a>
+          <a href="{{ route('conference-hall') }}"><i class="fas fa-building"></i> Conference Hall</a>
+          <a href="{{ route('gst-helpdesk') }}"><i class="fas fa-receipt"></i> GST &amp; Legal Helpdesk</a>
+          <a href="{{ route('advisory-services') }}"><i class="fas fa-comment-dots"></i> Appeal &amp; Advisory</a>
         </div>
       </div>
       <div class="nav-item">
         <div class="nav-link">Press <i class="fas fa-chevron-down chevron"></i></div>
         <div class="dropdown">
-          <a href="#"><i class="fas fa-newspaper"></i> Press Release</a>
-          <a href="#"><i class="fas fa-tv"></i> Media Coverage</a>
-          <a href="#"><i class="fas fa-briefcase"></i> Media Kit</a>
+          <a href="{{ route('press-release') }}"><i class="fas fa-newspaper"></i> Press Release</a>
+          <a href="{{ route('media-coverage') }}"><i class="fas fa-tv"></i> Media Coverage</a>
+          <a href="{{ route('media-kit') }}"><i class="fas fa-briefcase"></i> Media Kit</a>
         </div>
       </div>
     </nav>
@@ -164,8 +164,8 @@
         <li><a href="#"><i class="fas fa-chevron-right"></i>Aim &amp; Objectives</a></li>
         <li><a href="#"><i class="fas fa-chevron-right"></i>Activities</a></li>
         <li><a href="#"><i class="fas fa-chevron-right"></i>Awards</a></li>
-        <li><a href="#"><i class="fas fa-chevron-right"></i>Annual Reports</a></li>
-        <li><a href="#"><i class="fas fa-chevron-right"></i>Contact Us</a></li>
+        <li><a href="{{ route('annual-reports') }}"><i class="fas fa-chevron-right"></i>Annual Reports</a></li>
+        <li><a href="{{ route('contact') }}"><i class="fas fa-chevron-right"></i>Contact Us</a></li>
       </ul>
     </div>
     <div class="fcol">
@@ -193,10 +193,10 @@
       <h6>Services</h6>
       <ul>
         <li><a href="#"><i class="fas fa-chevron-right"></i>Notifications</a></li>
-        <li><a href="#"><i class="fas fa-chevron-right"></i>Grievance Cell</a></li>
-        <li><a href="#"><i class="fas fa-chevron-right"></i>GST Helpdesk</a></li>
-        <li><a href="#"><i class="fas fa-chevron-right"></i>Conference Hall</a></li>
-        <li><a href="#"><i class="fas fa-chevron-right"></i>Press / Media</a></li>
+        <li><a href="{{ route('grievance') }}"><i class="fas fa-chevron-right"></i>Grievance Cell</a></li>
+        <li><a href="{{ route('gst-helpdesk') }}"><i class="fas fa-chevron-right"></i>GST Helpdesk</a></li>
+        <li><a href="{{ route('conference-hall') }}"><i class="fas fa-chevron-right"></i>Conference Hall</a></li>
+        <li><a href="{{ route('media-kit') }}"><i class="fas fa-chevron-right"></i>Press / Media</a></li>
       </ul>
     </div>
   </div>

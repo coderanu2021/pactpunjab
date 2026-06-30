@@ -154,11 +154,12 @@ Office Bearers – P A C T Punjab & Chandigarh
     <h2 class="sec-title" style="margin-bottom:32px">All Office <span class="hl">Bearers 2024–26</span></h2>
 
     <div class="bearers-grid">
-      <div class="bearer-card" data-pos="01">
-        <div class="bearer-avatar" style="background:linear-gradient(140deg,var(--gold),#C47D00)">SW</div>
-        <h4>Sanjeev Walia</h4>
-        <div class="bearer-city"><i class="fas fa-map-marker-alt"></i> Chandigarh</div>
-        <div class="bearer-role" style="background:rgba(245,166,35,.12);color:#7A4A00">⭐ President</div>
+      @forelse($members as $index => $member)
+      <div class="bearer-card" data-pos="{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}">
+        <div class="bearer-avatar" style="background:linear-gradient(140deg,var(--gold),#C47D00)">{{ strtoupper(substr($member->name, 0, 2)) }}</div>
+        <h4>{{ $member->name }}</h4>
+        <div class="bearer-city"><i class="fas fa-map-marker-alt"></i> Punjab & Chandigarh</div>
+        <div class="bearer-role" style="background:rgba(245,166,35,.12);color:#7A4A00">{{ $member->designation ?? $member->type }}</div>
         <p>Leading PACT's vision, advocacy, and external representation at state and national levels.</p>
         <div class="bearer-contact">
           <div class="bcon"><i class="fas fa-envelope"></i></div>
@@ -166,97 +167,9 @@ Office Bearers – P A C T Punjab & Chandigarh
           <div class="bcon"><i class="fab fa-linkedin-in"></i></div>
         </div>
       </div>
-
-      <div class="bearer-card" data-pos="02">
-        <div class="bearer-avatar" style="background:linear-gradient(140deg,var(--blue2),var(--navy))">VP</div>
-        <h4>Rajinder Singh</h4>
-        <div class="bearer-city"><i class="fas fa-map-marker-alt"></i> Ludhiana</div>
-        <div class="bearer-role" style="background:rgba(30,80,162,.09);color:var(--blue2)">Vice President</div>
-        <p>Supporting the President and leading the Ludhiana chapter's engagement with PACT.</p>
-        <div class="bearer-contact">
-          <div class="bcon"><i class="fas fa-envelope"></i></div>
-          <div class="bcon"><i class="fas fa-phone"></i></div>
-          <div class="bcon"><i class="fab fa-linkedin-in"></i></div>
-        </div>
-      </div>
-
-      <div class="bearer-card" data-pos="03">
-        <div class="bearer-avatar" style="background:linear-gradient(140deg,var(--blue2),var(--navy))">AM</div>
-        <h4>Arun Mehta</h4>
-        <div class="bearer-city"><i class="fas fa-map-marker-alt"></i> Amritsar</div>
-        <div class="bearer-role" style="background:rgba(30,80,162,.09);color:var(--blue2)">Vice President</div>
-        <p>Representing Amritsar region members and overseeing SIG coordination activities.</p>
-        <div class="bearer-contact">
-          <div class="bcon"><i class="fas fa-envelope"></i></div>
-          <div class="bcon"><i class="fas fa-phone"></i></div>
-          <div class="bcon"><i class="fab fa-linkedin-in"></i></div>
-        </div>
-      </div>
-
-      <div class="bearer-card" data-pos="04">
-        <div class="bearer-avatar" style="background:linear-gradient(140deg,#059669,#064E3B)">SK</div>
-        <h4>Sunil Kumar</h4>
-        <div class="bearer-city"><i class="fas fa-map-marker-alt"></i> Chandigarh</div>
-        <div class="bearer-role" style="background:rgba(16,140,80,.09);color:#065F46">Secretary General</div>
-        <p>Managing PACT's secretariat, records, communications, and member correspondence.</p>
-        <div class="bearer-contact">
-          <div class="bcon"><i class="fas fa-envelope"></i></div>
-          <div class="bcon"><i class="fas fa-phone"></i></div>
-          <div class="bcon"><i class="fab fa-linkedin-in"></i></div>
-        </div>
-      </div>
-
-      <div class="bearer-card" data-pos="05">
-        <div class="bearer-avatar" style="background:linear-gradient(140deg,var(--accent),#8B1A06)">PK</div>
-        <h4>Pankaj Kapoor</h4>
-        <div class="bearer-city"><i class="fas fa-map-marker-alt"></i> Jalandhar</div>
-        <div class="bearer-role" style="background:rgba(224,58,18,.08);color:var(--accent)">Joint Secretary</div>
-        <p>Assisting the Secretary General and leading the Jalandhar chapter's administrative work.</p>
-        <div class="bearer-contact">
-          <div class="bcon"><i class="fas fa-envelope"></i></div>
-          <div class="bcon"><i class="fas fa-phone"></i></div>
-          <div class="bcon"><i class="fab fa-linkedin-in"></i></div>
-        </div>
-      </div>
-
-      <div class="bearer-card" data-pos="06">
-        <div class="bearer-avatar" style="background:linear-gradient(140deg,#7C3AED,#2E1065)">RG</div>
-        <h4>Rohit Gupta</h4>
-        <div class="bearer-city"><i class="fas fa-map-marker-alt"></i> Patiala</div>
-        <div class="bearer-role" style="background:rgba(124,58,237,.09);color:#7C3AED">Treasurer</div>
-        <p>Overseeing PACT's finances, accounts, audits, and annual financial reporting.</p>
-        <div class="bearer-contact">
-          <div class="bcon"><i class="fas fa-envelope"></i></div>
-          <div class="bcon"><i class="fas fa-phone"></i></div>
-          <div class="bcon"><i class="fab fa-linkedin-in"></i></div>
-        </div>
-      </div>
-
-      <div class="bearer-card" data-pos="07">
-        <div class="bearer-avatar" style="background:linear-gradient(140deg,#0284C7,#0C4A6E)">NB</div>
-        <h4>Navdeep Bhatia</h4>
-        <div class="bearer-city"><i class="fas fa-map-marker-alt"></i> Mohali</div>
-        <div class="bearer-role" style="background:rgba(14,165,233,.1);color:#0369A1">Joint Treasurer</div>
-        <p>Supporting the Treasurer and managing Mohali chapter's financial activities.</p>
-        <div class="bearer-contact">
-          <div class="bcon"><i class="fas fa-envelope"></i></div>
-          <div class="bcon"><i class="fas fa-phone"></i></div>
-          <div class="bcon"><i class="fab fa-linkedin-in"></i></div>
-        </div>
-      </div>
-
-      <div class="bearer-card" data-pos="08">
-        <div class="bearer-avatar" style="background:linear-gradient(140deg,#D97706,#78350F)">PS</div>
-        <h4>Priya Sharma</h4>
-        <div class="bearer-city"><i class="fas fa-map-marker-alt"></i> Chandigarh</div>
-        <div class="bearer-role" style="background:rgba(217,119,6,.1);color:#92400E">PRO & Media</div>
-        <p>Managing PACT's public relations, media communications, and digital presence.</p>
-        <div class="bearer-contact">
-          <div class="bcon"><i class="fas fa-envelope"></i></div>
-          <div class="bcon"><i class="fas fa-phone"></i></div>
-          <div class="bcon"><i class="fab fa-linkedin-in"></i></div>
-        </div>
-      </div>
+      @empty
+      <div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted)">No office bearers found. Please add them from the Admin Panel CMS.</div>
+      @endforelse
     </div>
   </div>
 

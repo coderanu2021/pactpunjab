@@ -170,7 +170,7 @@ Page Title
     </div>
     <div class="page-hero-tag"><span>About Us</span></div>
     <h1>Awards & <span>Recognition</span></h1>
-    <p>Celebrating excellence across Punjab & Chandigarh's IT trading community — honouring the businesses and individuals who go above and beyond.</p>
+    <p>{{ $settings['page_awards_intro'] ?? "Celebrating excellence across Punjab & Chandigarh's IT trading community — honouring the businesses and individuals who go above and beyond." }}</p>
     <div class="hero-chips">
       <div class="hero-chip"><i class="fas fa-trophy"></i> 5+ Award Categories</div>
       <div class="hero-chip"><i class="fas fa-calendar-alt"></i> Annual Ceremony</div>
@@ -186,8 +186,8 @@ Page Title
   <div class="featured-band">
     <div>
       <div class="featured-tag"><span>✨ Awards Season 2025</span></div>
-      <h2>PACT Excellence Awards 2025 — Nominations Now Open</h2>
-      <p>The most prestigious recognition in Punjab & Chandigarh's IT trade sector. Nominate deserving businesses and individuals before the deadline. Winners will be felicitated at the Annual Meet 2025 — Punjab IT Mahakumbh.</p>
+      <h2>{{ $settings['awards_season_title'] ?? 'PACT Excellence Awards 2025 — Nominations Now Open' }}</h2>
+      <p>{{ $settings['awards_season_desc'] ?? "The most prestigious recognition in Punjab & Chandigarh's IT trade sector. Nominate deserving businesses and individuals before the deadline. Winners will be felicitated at the Annual Meet 2025 — Punjab IT Mahakumbh." }}</p>
       <div class="btn-group" style="margin-top:24px">
         <a href="#nominate" class="btn-gold"><i class="fas fa-pen"></i> Nominate Now</a>
         <a href="#categories" class="btn-ghost-dark"><i class="fas fa-list"></i> View Categories</a>

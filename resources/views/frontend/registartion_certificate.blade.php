@@ -230,7 +230,7 @@ Page Title
     </div>
     <div class="page-hero-tag"><span>Members</span></div>
     <h1>Registration for <span>Certification</span></h1>
-    <p>Complete your certification registration with P A C T. Fill in the details below carefully — our team will review and process your application.</p>
+    <p>{{ $settings['page_registration_intro'] ?? 'Complete your certification registration with P A C T. Fill in the details below carefully — our team will review and process your application.' }}</p>
   </div>
 </div>
 

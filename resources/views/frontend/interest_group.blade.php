@@ -158,7 +158,7 @@ Page Title
     <div class="intro-text">
       <div class="eyebrow">What Are SIGs?</div>
       <h2 class="sec-title">Focused Communities <span class="hl">Within P A C T</span></h2>
-      <p>Special Interest Groups (SIGs) are focused sub-communities within P A C T that bring together members who share a common specialisation, technology domain, or business interest. While P A C T serves the entire IT trading ecosystem, SIGs allow members to go deeper — connecting with peers who truly understand their specific segment.</p>
+      <p>{{ $settings['page_sig_intro'] ?? 'Special Interest Groups (SIGs) are focused sub-communities within P A C T that bring together members who share a common specialisation, technology domain, or business interest. While P A C T serves the entire IT trading ecosystem, SIGs allow members to go deeper — connecting with peers who truly understand their specific segment.' }}</p>
       <p>Each SIG has its own <strong>dedicated forum, events, and working groups</strong> — covering everything from technical seminars and peer roundtables to joint advocacy on niche regulatory issues. SIGs are the heart of P A C T's knowledge-sharing culture.</p>
       <p>Membership in any SIG is <strong>open to all P A C T members at no additional cost</strong>. Members are encouraged to join multiple SIGs based on their business focus and personal interests.</p>
     </div>

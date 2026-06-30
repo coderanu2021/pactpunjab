@@ -9,28 +9,29 @@
   <div class="hero-glow2"></div>
   <div class="hero-inner">
     <div>
-      <div class="hero-pill"><span class="dot"></span><span>Punjab & Chandigarh's Premier IT Trade Body</span></div>
-      <h1>Empowering <span class="hl">IT Traders</span> Across Punjab & Chandigarh</h1>
-      <p>P A C T unites 600+ IT businesses, advocates at both State &amp; Central Government levels, and creates the connections, knowledge, and opportunities that drive sustainable growth in the technology sector.</p>
+      <div class="hero-pill"><span class="dot"></span><span>{{ $settings['home_hero_pill'] ?? "Punjab & Chandigarh's Premier IT Trade Body" }}</span></div>
+      <h1>{{ $settings['home_hero_title'] ?? 'Empowering' }} <span class="hl">{{ $settings['home_hero_subtitle'] ?? 'IT Traders' }}</span></h1>
+      <p>{{ $settings['home_hero_desc'] ?? 'PACT Punjab connects and supports computer traders across Punjab, driving growth through association, certification, and community.' }}</p>
       <div class="hero-btns">
-        <a href="#" class="btn-hero-primary"><i class="fas fa-user-plus"></i> Join P A C T</a>
-        <a href="#" class="btn-hero-ghost"><i class="fas fa-calendar-alt"></i> Upcoming Events</a>
+        <a href="{{ $settings['home_hero_cta_link'] ?? route('become-member') }}" class="btn-hero-primary"><i class="fas fa-user-plus"></i> {{ $settings['home_hero_cta_text'] ?? 'Join P A C T' }}</a>
+        <a href="{{ route('events') }}" class="btn-hero-ghost"><i class="fas fa-calendar-alt"></i> Upcoming Events</a>
       </div>
       <div class="hero-kpis">
-        <div class="kpi"><div class="kpi-n">600<sup>+</sup></div><div class="kpi-l">Members</div></div>
-        <div class="kpi"><div class="kpi-n">20<sup>yr</sup></div><div class="kpi-l">Established</div></div>
-        <div class="kpi"><div class="kpi-n">50<sup>+</sup></div><div class="kpi-l">Events</div></div>
+        <div class="kpi"><div class="kpi-n">{{ $settings['home_stat1_count'] ?? '600+' }}</div><div class="kpi-l">{{ $settings['home_stat1_label'] ?? 'Members' }}</div></div>
+        <div class="kpi"><div class="kpi-n">{{ $settings['home_stat2_count'] ?? '28+' }}</div><div class="kpi-l">{{ $settings['home_stat2_label'] ?? 'Established' }}</div></div>
+        <div class="kpi"><div class="kpi-n">{{ $settings['home_stat3_count'] ?? '50+' }}</div><div class="kpi-l">{{ $settings['home_stat3_label'] ?? 'Events' }}</div></div>
         <div class="kpi"><div class="kpi-n">11<sup>+</sup></div><div class="kpi-l">City Assocs.</div></div>
       </div>
     </div>
+    @if($president)
     <div class="pres-card">
       <div class="pres-header">
-        <div class="pres-avatar">SW</div>
+        <div class="pres-avatar">{{ strtoupper(substr($president->name, 0, 2)) }}</div>
         <div class="pres-meta">
-          <strong>Sanjeev Walia</strong>
-          <span>Chairman, PACT — Chandigarh</span>
+          <strong>{{ $president->name }}</strong>
+          <span>{{ $president->designation }}, PACT</span>
         </div>
-        <div class="pres-badge">⭐ President</div>
+        <div class="pres-badge">⭐ {{ $president->designation }}</div>
       </div>
       <p class="pres-quote">I am truly grateful to all members for this honour. Together we will take P A C T to unprecedented heights — because teamwork makes the dream work, and our best chapters are still ahead.</p>
       <a href="#" class="pres-link">Read Full Message <i class="fas fa-arrow-right" style="font-size:11px"></i></a>
@@ -41,6 +42,7 @@
         <span class="chip">🌱 CSR Active</span>
       </div>
     </div>
+    @endif
   </div>
 </section>
 
@@ -50,10 +52,9 @@
     <div class="about-grid">
       <div>
         <div class="eyebrow">Who We Are</div>
-        <h2 class="sec-title">The Association That Drives<br>Punjab & Chandigarh's <span class="hl">IT Industry</span></h2>
+        <h2 class="sec-title">{!! $settings['home_about_title'] ?? 'The Association That Drives<br>Punjab & Chandigarh\'s <span class="hl">IT Industry</span>' !!}</h2>
         <div class="about-text">
-          <p><strong>Punjab Association of Computer Traders (P A C T)</strong>, is the leading body for IT entrepreneurs in the region. Headquartered in Chandigarh with 600+ members across Punjab & Chandigarh, we have been the region's strongest IT trade advocate.</p>
-          <p>We actively lobby with State &amp; Central Governments on policy issues, coordinate stakeholders, and create sustainable opportunities that improve business competitiveness and expand market reach for our members.</p>
+          <p>{{ $settings['home_about_desc'] ?? 'Founded in 1996, PACT Punjab is the leading association for computer traders in Punjab, providing certification, training, and networking opportunities.' }}</p>
         </div>
         <div class="feat-list">
           <div class="feat">
@@ -72,16 +73,16 @@
       </div>
       <div class="stats-mosaic">
         <div class="stat-tile">
-          <div class="stat-n">600<sup>+</sup></div>
-          <div class="stat-l">Active Members</div>
+          <div class="stat-n">{{ $settings['home_stat1_count'] ?? '600+' }}</div>
+          <div class="stat-l">{{ $settings['home_stat1_label'] ?? 'Active Members' }}</div>
         </div>
         <div class="stat-tile accent">
-          <div class="stat-n">20<sup>yr</sup></div>
-          <div class="stat-l">Years of Legacy</div>
+          <div class="stat-n">{{ $settings['home_stat2_count'] ?? '28+' }}</div>
+          <div class="stat-l">{{ $settings['home_stat2_label'] ?? 'Years of Legacy' }}</div>
         </div>
         <div class="stat-tile accent">
-          <div class="stat-n">50<sup>+</sup></div>
-          <div class="stat-l">Events Per Year</div>
+          <div class="stat-n">{{ $settings['home_stat3_count'] ?? '50+' }}</div>
+          <div class="stat-l">{{ $settings['home_stat3_label'] ?? 'Events Per Year' }}</div>
         </div>
         <div class="stat-tile">
           <div class="stat-n">6<sup>+</sup></div>
@@ -112,62 +113,24 @@
       </div>
     </div>
     <div class="events-grid">
+      @forelse($events as $event)
       <div class="ev-card">
         <div class="ev-thumb" style="background:linear-gradient(135deg,#0C2F5E,#1A3C6E)">
-          🏏
-          <span class="ev-cat-pill" style="background:#1E50A2">Sports</span>
+          <i class="{{ $event->icon_class ?? 'fas fa-calendar' }}" style="color:#fff; font-size: 24px;"></i>
+          <span class="ev-cat-pill" style="background:#1E50A2">{{ $event->category ?? 'Event' }}</span>
         </div>
         <div class="ev-body">
-          <div class="ev-meta"><span class="ev-date"><i class="fas fa-calendar"></i> 22 Feb 2026</span></div>
-          <div class="ev-title">Compass Premier League — Cricket Tournament 2026</div>
+          <div class="ev-meta"><span class="ev-date"><i class="fas fa-calendar"></i> {{ \Carbon\Carbon::parse($event->event_date)->format('d M Y') }}</span></div>
+          <div class="ev-title">{{ $event->title }}</div>
           <div class="ev-footer">
-            <div class="ev-status"><span class="dot"></span>Past Event</div>
+            <div class="ev-status"><span class="dot"></span>Upcoming</div>
             <div class="ev-arrow"><i class="fas fa-arrow-right"></i></div>
           </div>
         </div>
       </div>
-      <div class="ev-card">
-        <div class="ev-thumb" style="background:linear-gradient(135deg,#2E1065,#6D28D9)">
-          🛡️
-          <span class="ev-cat-pill" style="background:#7C3AED">Seminar</span>
-        </div>
-        <div class="ev-body">
-          <div class="ev-meta"><span class="ev-date"><i class="fas fa-calendar"></i> 25 Nov 2025</span></div>
-          <div class="ev-title">Ideal Insurance Brokers Pvt Ltd — Industry Workshop</div>
-          <div class="ev-footer">
-            <div class="ev-status"><span class="dot"></span>Past Event</div>
-            <div class="ev-arrow"><i class="fas fa-arrow-right"></i></div>
-          </div>
-        </div>
-      </div>
-      <div class="ev-card">
-        <div class="ev-thumb" style="background:linear-gradient(135deg,#064E3B,#059669)">
-          👁️
-          <span class="ev-cat-pill" style="background:#059669">CSR</span>
-        </div>
-        <div class="ev-body">
-          <div class="ev-meta"><span class="ev-date"><i class="fas fa-calendar"></i> 16 Nov 2025</span></div>
-          <div class="ev-title">Free Eye Operation — Community Health Initiative</div>
-          <div class="ev-footer">
-            <div class="ev-status"><span class="dot"></span>Past Event</div>
-            <div class="ev-arrow"><i class="fas fa-arrow-right"></i></div>
-          </div>
-        </div>
-      </div>
-      <div class="ev-card">
-        <div class="ev-thumb" style="background:linear-gradient(135deg,#78350F,#D97706)">
-          🪔
-          <span class="ev-cat-pill" style="background:#D97706">Festival</span>
-        </div>
-        <div class="ev-body">
-          <div class="ev-meta"><span class="ev-date"><i class="fas fa-calendar"></i> 26 Oct 2025</span></div>
-          <div class="ev-title">Diwali Milan 2025 — Fellowship &amp; Celebration</div>
-          <div class="ev-footer">
-            <div class="ev-status"><span class="dot"></span>Past Event</div>
-            <div class="ev-arrow"><i class="fas fa-arrow-right"></i></div>
-          </div>
-        </div>
-      </div>
+      @empty
+      <div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted)">No upcoming events found.</div>
+      @endforelse
     </div>
   </div>
 </section>
@@ -186,36 +149,17 @@
       </div>
     </div>
     <div class="srv-grid">
+      @forelse($services as $service)
       <a href="#" class="srv-card">
-        <div class="srv-ico b"><i class="fas fa-bell"></i></div>
-        <h4>Circulars &amp; Notifications</h4>
-        <p>Stay current with statutory GST notifications, TDS updates, and member circulars relevant to the IT industry.</p>
+        <div class="srv-ico {{ ['b', 'r', 'g', 'y', 'p', 't'][array_rand(['b', 'r', 'g', 'y', 'p', 't'])] }}">
+          <i class="{{ $service->icon_class ?? 'fas fa-star' }}"></i>
+        </div>
+        <h4>{{ $service->title }}</h4>
+        <p>{{ Str::limit($service->description, 100) }}</p>
         <span class="srv-card-link">Explore <i class="fas fa-arrow-right" style="font-size:10px"></i></span>
       </a>
-      <a href="#" class="srv-card">
-        <div class="srv-ico r"><i class="fas fa-gavel"></i></div>
-        <h4>Grievance Cell</h4>
-        <p>Amicable resolution of disputes between members, distributors, and third parties — fairly and swiftly.</p>
-        <span class="srv-card-link">Explore <i class="fas fa-arrow-right" style="font-size:10px"></i></span>
-      </a>
-      <a href="#" class="srv-card">
-        <div class="srv-ico y"><i class="fas fa-receipt"></i></div>
-        <h4>GST &amp; Legal Helpdesk</h4>
-        <p>Expert guidance on GST compliance, e-Way Bills, e-Invoicing, and all legal matters affecting your business.</p>
-        <span class="srv-card-link">Explore <i class="fas fa-arrow-right" style="font-size:10px"></i></span>
-      </a>
-      <a href="#" class="srv-card">
-        <div class="srv-ico g"><i class="fas fa-comment-dots"></i></div>
-        <h4>Appeal &amp; Advisory</h4>
-        <p>Strategic representation and advice on government appeals and industry policy matters at all levels.</p>
-        <span class="srv-card-link">Explore <i class="fas fa-arrow-right" style="font-size:10px"></i></span>
-      </a>
-      <a href="#" class="srv-card">
-        <div class="srv-ico p"><i class="fas fa-building"></i></div>
-        <h4>Conference Hall</h4>
-        <p>State-of-the-art meeting and conference facilities at P A C T headquarters available to all members.</p>
-        <span class="srv-card-link">Explore <i class="fas fa-arrow-right" style="font-size:10px"></i></span>
-      </a>
+      @empty
+      @endforelse
       <a href="#" class="srv-card" style="border:1px solid rgba(245,166,35,.25);background:rgba(245,166,35,.04)">
         <div class="srv-ico c"><i class="fas fa-star"></i></div>
         <h4>Become a Member</h4>

@@ -122,8 +122,7 @@
     <div>
       <div class="eyebrow">Our Purpose</div>
       <h2 class="sec-title">Why P A C T <span class="hl">Exists</span></h2>
-      <p>P A C T was founded on a simple but powerful belief — that IT traders across Punjab & Chandigarh are stronger together than apart. Every policy we lobby for, every seminar we host, every grievance we resolve, and every connection we facilitate flows from that core conviction.</p>
-      <p>Our <strong>aim</strong> is to be the definitive platform for IT entrepreneurs in the region — providing them with advocacy, knowledge, community, and the resources to grow their businesses in an increasingly complex environment.</p>
+      <p>{{ $settings['page_aims_intro'] ?? 'PACT was founded on a simple but powerful belief — that IT traders across Punjab & Chandigarh are stronger together than apart.' }}</p>
       <p>Our <strong>objectives</strong> set out the specific, measurable actions through which we pursue that aim — from government engagement and compliance support to networking events and industry recognition.</p>
     </div>
 
