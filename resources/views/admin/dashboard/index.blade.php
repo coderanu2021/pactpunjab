@@ -23,7 +23,7 @@
         <div class="stat-label">Total Members</div>
         <div class="stat-icon" style="background:#EFF6FF;color:#2563EB"><i class="fa-solid fa-users"></i></div>
       </div>
-      <div class="stat-value">4,832</div>
+      <div class="stat-value">{{ number_format($totalMembers) }}</div>
       <div class="stat-footer">
         <span class="badge-change badge-up"><i class="fa-solid fa-arrow-trend-up"></i> 8.4%</span>
         <span class="stat-footer-label">vs last month</span>
@@ -35,7 +35,7 @@
         <div class="stat-label">Pending Approvals</div>
         <div class="stat-icon" style="background:#FFFBEB;color:#D97706"><i class="fa-solid fa-hourglass-half"></i></div>
       </div>
-      <div class="stat-value">38</div>
+      <div class="stat-value">{{ number_format($pendingApprovals) }}</div>
       <div class="stat-footer">
         <span class="badge-change badge-down"><i class="fa-solid fa-arrow-trend-down"></i> 3</span>
         <span class="stat-footer-label">since yesterday</span>
@@ -47,7 +47,7 @@
         <div class="stat-label">Certificates Issued</div>
         <div class="stat-icon" style="background:#F5F3FF;color:#7C3AED"><i class="fa-solid fa-certificate"></i></div>
       </div>
-      <div class="stat-value">1,209</div>
+      <div class="stat-value">{{ number_format($totalCertificates) }}</div>
       <div class="stat-footer">
         <span class="badge-change badge-up"><i class="fa-solid fa-arrow-trend-up"></i> 14%</span>
         <span class="stat-footer-label">vs last month</span>
@@ -59,7 +59,7 @@
         <div class="stat-label">Upcoming Events</div>
         <div class="stat-icon" style="background:#F0FDF4;color:#16A34A"><i class="fa-solid fa-calendar-check"></i></div>
       </div>
-      <div class="stat-value">7</div>
+      <div class="stat-value">{{ number_format($upcomingEvents) }}</div>
       <div class="stat-footer">
         <span class="badge-change badge-up"><i class="fa-solid fa-arrow-trend-up"></i> 2 new</span>
         <span class="stat-footer-label">this week</span>
@@ -72,31 +72,31 @@
   <div class="module-grid">
     <div class="module-card">
       <div class="module-icon" style="background:#EFF6FF;color:#2563EB"><i class="fa-solid fa-file-pen"></i></div>
-      <div class="module-text"><strong>Registrations</strong><span>248 total</span></div>
+      <div class="module-text"><strong>Registrations</strong><span>{{ number_format($totalRegistrations) }} total</span></div>
     </div>
     <div class="module-card">
       <div class="module-icon" style="background:#F5F3FF;color:#7C3AED"><i class="fa-solid fa-certificate"></i></div>
-      <div class="module-text"><strong>Certificates</strong><span>1,209 issued</span></div>
+      <div class="module-text"><strong>Certificates</strong><span>{{ number_format($totalCertificates) }} issued</span></div>
     </div>
     <div class="module-card">
       <div class="module-icon" style="background:#FFFBEB;color:#D97706"><i class="fa-solid fa-calendar-days"></i></div>
-      <div class="module-text"><strong>Events</strong><span>7 upcoming</span></div>
+      <div class="module-text"><strong>Events</strong><span>{{ number_format($upcomingEvents) }} upcoming</span></div>
     </div>
     <div class="module-card">
       <div class="module-icon" style="background:#F0FDF4;color:#16A34A"><i class="fa-solid fa-images"></i></div>
-      <div class="module-text"><strong>Gallery</strong><span>14 albums</span></div>
+      <div class="module-text"><strong>Gallery</strong><span>{{ number_format($totalAlbums) }} albums</span></div>
     </div>
     <div class="module-card">
       <div class="module-icon" style="background:#FEF2F2;color:#DC2626"><i class="fa-solid fa-bell"></i></div>
-      <div class="module-text"><strong>Notifications</strong><span>5 unread</span></div>
+      <div class="module-text"><strong>Notifications</strong><span>{{ number_format($unreadNotifications) }} total</span></div>
     </div>
     <div class="module-card">
       <div class="module-icon" style="background:#F0F9FF;color:#0EA5E9"><i class="fa-solid fa-folder-open"></i></div>
-      <div class="module-text"><strong>Documents</strong><span>32 files</span></div>
+      <div class="module-text"><strong>Documents</strong><span>{{ number_format($totalDocuments) }} files</span></div>
     </div>
     <div class="module-card">
       <div class="module-icon" style="background:#EFF6FF;color:#2563EB"><i class="fa-solid fa-layer-group"></i></div>
-      <div class="module-text"><strong>CMS Pages</strong><span>4 pages</span></div>
+      <div class="module-text"><strong>CMS Pages</strong><span>{{ number_format($totalPages) }} pages</span></div>
     </div>
     <div class="module-card">
       <div class="module-icon" style="background:#F5F3FF;color:#7C3AED"><i class="fa-solid fa-gear"></i></div>
